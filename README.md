@@ -14,10 +14,6 @@ Make sure your branch builds without any warnings/issues:
 mvn clean install -Pqulice
 ```
 
-## Contributors
-
-- [@VsSekorin](https://github.com/VsSekorin) as Vseslav Sekorin
-
 ## MIT License
 
 Copyright (c) 2017 Vseslav Sekorin

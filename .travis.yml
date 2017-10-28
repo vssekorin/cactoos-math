@@ -2,3 +2,5 @@ language: java
 sudo: false
 jdk:
   - openjdk8
+script:
+  - mvn clean install -Pqulice --errors --batch-mode
