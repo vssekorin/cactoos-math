@@ -35,20 +35,28 @@ import org.cactoos.Scalar;
 public final class Exp implements Scalar<Double> {
 
     /**
-     * Number.
+     * Scalar.
      */
-    private final Number number;
+    private final Scalar<Number> scalar;
 
     /**
      * Ctor.
      * @param nmbr Number
      */
     public Exp(final Number nmbr) {
-        this.number = nmbr;
+        this(() -> nmbr);
+    }
+
+    /**
+     * Ctor.
+     * @param sclr Scalar
+     */
+    public Exp(final Scalar<Number> sclr) {
+        this.scalar = sclr;
     }
 
     @Override
     public Double value() throws Exception {
-        return Math.exp(this.number.doubleValue());
+        return Math.exp(this.scalar.value().doubleValue());
     }
 }

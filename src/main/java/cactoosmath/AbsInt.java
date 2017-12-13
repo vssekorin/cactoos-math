@@ -35,20 +35,28 @@ import org.cactoos.Scalar;
 public final class AbsInt implements Scalar<Integer> {
 
     /**
-     * Number.
+     * Scalar.
      */
-    private final Integer number;
+    private final Scalar<Integer> scalar;
 
     /**
      * Ctor.
      * @param nmbr Number
      */
     public AbsInt(final Integer nmbr) {
-        this.number = nmbr;
+        this(() -> nmbr);
+    }
+
+    /**
+     * Ctor.
+     * @param sclr Scalar
+     */
+    public AbsInt(final Scalar<Integer> sclr) {
+        this.scalar = sclr;
     }
 
     @Override
     public Integer value() throws Exception {
-        return Math.abs(this.number);
+        return Math.abs(this.scalar.value());
     }
 }
