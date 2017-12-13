@@ -35,20 +35,28 @@ import org.cactoos.Scalar;
 public final class AbsDouble implements Scalar<Double> {
 
     /**
-     * Number.
+     * Scalar.
      */
-    private final Double number;
+    private final Scalar<Double> scalar;
 
     /**
      * Ctor.
      * @param nmbr Number
      */
     public AbsDouble(final Double nmbr) {
-        this.number = nmbr;
+        this(() -> nmbr);
+    }
+
+    /**
+     * Ctor.
+     * @param sclr Scalar
+     */
+    public AbsDouble(final Scalar<Double> sclr) {
+        this.scalar = sclr;
     }
 
     @Override
     public Double value() throws Exception {
-        return Math.abs(this.number);
+        return Math.abs(this.scalar.value());
     }
 }
