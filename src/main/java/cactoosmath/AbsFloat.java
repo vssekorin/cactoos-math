@@ -26,24 +26,24 @@ package cactoosmath;
 import org.cactoos.Scalar;
 
 /**
- * Returns the absolute value of an long value.
+ * Returns the absolute value of an float value.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class AbsLong implements Scalar<Long> {
+public final class AbsFloat implements Scalar<Float> {
 
     /**
      * Scalar.
      */
-    private final Scalar<Long> scalar;
+    private final Scalar<Float> scalar;
 
     /**
      * Ctor.
      * @param nmbr Number
      */
-    public AbsLong(final Long nmbr) {
+    public AbsFloat(final Float nmbr) {
         this(() -> nmbr);
     }
 
@@ -51,12 +51,12 @@ public final class AbsLong implements Scalar<Long> {
      * Ctor.
      * @param sclr Scalar
      */
-    public AbsLong(final Scalar<Long> sclr) {
+    public AbsFloat(final Scalar<Float> sclr) {
         this.scalar = sclr;
     }
 
     @Override
-    public Long value() throws Exception {
+    public Float value() throws Exception {
         return Math.abs(this.scalar.value());
     }
 }
