@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link MxSize}.
+ * Test case for {@link MxColumnNumber}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -37,17 +37,18 @@ import org.junit.Test;
  * @checkstyle MagicNumberCheck (500 lines)
  * @checkstyle ArrayTrailingCommaCheck (500 lines)
  */
-public final class MxSizeTest {
+public final class MxColumnNumberTest {
+
     @Test
     public void value() {
         MatcherAssert.assertThat(
-            new MxSize<>(
+            new MxColumnNumber<>(
                 new Integer[][]{
-                    {1, 2},
-                    {3, 4}
+                    {1, 2, 3},
+                    {4, 5, 6}
                 }
             ),
-            new ScalarHasValue<>(2)
+            new ScalarHasValue<>(3)
         );
     }
 }

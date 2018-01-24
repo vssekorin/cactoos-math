@@ -21,63 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath.iterator;
+package cactoosmath.matrix;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import org.cactoos.Func;
-import org.cactoos.func.UncheckedFunc;
+import org.cactoos.ScalarHasValue;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Sequence.
+ * Test case for {@link MxRowsNumber}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Elements type
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
+ * @checkstyle ArrayTrailingCommaCheck (500 lines)
  */
-public final class Seq<T> implements Iterator<T> {
+public final class MxRowsNumberTest {
 
-    /**
-     * First element.
-     */
-    private final T first;
-
-    /**
-     * Increment function.
-     */
-    private final UncheckedFunc<T, T> inc;
-
-    /**
-     * Previous element.
-     */
-    private T prev;
-
-    /**
-     * Ctor.
-     * @param first First element
-     * @param next Increment function
-     */
-    public Seq(final T first, final Func<T, T> next) {
-        this.first = first;
-        this.inc = new UncheckedFunc<>(next);
-    }
-
-    @Override
-    public boolean hasNext() {
-        return true;
-    }
-
-    @Override
-    public T next() {
-        if (!this.hasNext()) {
-            throw new NoSuchElementException();
-        }
-        if (this.prev == null) {
-            this.prev = this.first;
-        } else {
-            this.prev = this.inc.apply(this.prev);
-        }
-        return this.prev;
+    @Test
+    public void value() {
+        MatcherAssert.assertThat(
+            new MxRowsNumber<>(
+                new Integer[][]{
+                    {1, 2, 3},
+                    {4, 5, 6}
+                }
+            ),
+            new ScalarHasValue<>(2)
+        );
     }
 }

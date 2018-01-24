@@ -27,14 +27,14 @@ import cactoosmath.Matrix;
 import org.cactoos.Scalar;
 
 /**
- * Size of matrix.
+ * Number of column.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Type of matrix
  * @since 0.1
  */
-public final class MxSize<T> implements Scalar<Integer> {
+public final class MxColumnNumber<T> implements Scalar<Integer> {
 
     /**
      * Matrix.
@@ -45,7 +45,7 @@ public final class MxSize<T> implements Scalar<Integer> {
      * Ctor.
      * @param mtrx Matrix.
      */
-    public MxSize(final Matrix<T> mtrx) {
+    public MxColumnNumber(final Matrix<T> mtrx) {
         this(mtrx.asArray());
     }
 
@@ -54,12 +54,12 @@ public final class MxSize<T> implements Scalar<Integer> {
      * @param mtrx Matrix.
      */
     @SuppressWarnings("PMD.UseVarargs")
-    public MxSize(final T[][] mtrx) {
+    public MxColumnNumber(final T[][] mtrx) {
         this.matrix = mtrx.clone();
     }
 
     @Override
     public Integer value() throws Exception {
-        return this.matrix.length;
+        return this.matrix[0].length;
     }
 }

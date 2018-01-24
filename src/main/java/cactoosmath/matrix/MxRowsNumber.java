@@ -21,63 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath.iterator;
+package cactoosmath.matrix;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import org.cactoos.Func;
-import org.cactoos.func.UncheckedFunc;
+import cactoosmath.Matrix;
+import org.cactoos.Scalar;
 
 /**
- * Sequence.
+ * Number of row.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Elements type
+ * @param <T> Type of matrix
  * @since 0.1
  */
-public final class Seq<T> implements Iterator<T> {
+public final class MxRowsNumber<T> implements Scalar<Integer> {
 
     /**
-     * First element.
+     * Matrix.
      */
-    private final T first;
-
-    /**
-     * Increment function.
-     */
-    private final UncheckedFunc<T, T> inc;
-
-    /**
-     * Previous element.
-     */
-    private T prev;
+    private final T[][] matrix;
 
     /**
      * Ctor.
-     * @param first First element
-     * @param next Increment function
+     * @param mtrx Matrix.
      */
-    public Seq(final T first, final Func<T, T> next) {
-        this.first = first;
-        this.inc = new UncheckedFunc<>(next);
+    public MxRowsNumber(final Matrix<T> mtrx) {
+        this(mtrx.asArray());
+    }
+
+    /**
+     * Ctor.
+     * @param mtrx Matrix.
+     */
+    @SuppressWarnings("PMD.UseVarargs")
+    public MxRowsNumber(final T[][] mtrx) {
+        this.matrix = mtrx.clone();
     }
 
     @Override
-    public boolean hasNext() {
-        return true;
-    }
-
-    @Override
-    public T next() {
-        if (!this.hasNext()) {
-            throw new NoSuchElementException();
-        }
-        if (this.prev == null) {
-            this.prev = this.first;
-        } else {
-            this.prev = this.inc.apply(this.prev);
-        }
-        return this.prev;
+    public Integer value() throws Exception {
+        return this.matrix.length;
     }
 }
