@@ -14,6 +14,14 @@ Make sure your branch builds without any warnings/issues:
 mvn clean install -Pqulice
 ```
 
+## Seq
+
+Natural Number:
+```
+new Seq(0, a -> a + 1)
+```
+
+
 ## MIT License
 
 Copyright (c) 2017 Vseslav Sekorin
