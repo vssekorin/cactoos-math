@@ -20,6 +20,22 @@ Natural Number:
 ```
 new Seq(0, a -> a + 1)
 ```
+Stream of random double greater than or equal to 6 and less than 16:
+```
+new Seq(new Random(6, 16), a -> new Random(6, 16))
+```
+```
+new And(
+    (Proc<Double>) System.out::println,
+    new Mapped<Scalar<Double>, Double>(
+        Scalar::value,
+        new Limited<>(
+            20,
+            new Seq<>(new Random(0, 10), a -> new Random(0, 10))
+        )
+    )
+).value();
+```
 
 
 ## MIT License
