@@ -4,27 +4,17 @@
 
 Addition to the [Cactoos](https://github.com/yegor256/cactoos) containing mathematical objects.
 
-## How to contribute?
-
-Just fork the repo and send us a pull request.
-
-Make sure your branch builds without any warnings/issues:
-
-```
-mvn clean install -Pqulice
-```
-
 ## Seq
 
 Natural Number:
-```
+```java
 new Seq(0, a -> a + 1)
 ```
 Stream of random double greater than or equal to 6 and less than 16:
-```
+```java
 new Seq(new Random(6, 16), a -> new Random(6, 16))
 ```
-```
+```java
 new And(
     (Proc<Double>) System.out::println,
     new Mapped<Scalar<Double>, Double>(
@@ -37,6 +27,22 @@ new And(
 ).value();
 ```
 
+## BiSeq
+
+Fibonacci number:
+```java
+new BiSeq<>(0, 1, (fst, snd) -> fst + snd)
+```
+
+## How to contribute?
+
+Just fork the repo and send us a pull request.
+
+Make sure your branch builds without any warnings/issues:
+
+```
+mvn clean install -Pqulice
+```
 
 ## MIT License
 
