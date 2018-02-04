@@ -37,10 +37,15 @@ import org.cactoos.scalar.UncheckedScalar;
 public final class Sqrt extends NumberEnvelope {
 
     /**
+     * Serialization marker.
+     */
+    private static final long serialVersionUID = -1585717997308529102L;
+
+    /**
      * Ctor.
      * @param scalar Scalar
      */
-    public Sqrt(Scalar<Double> scalar) {
+    public Sqrt(final Scalar<Double> scalar) {
         this(new UncheckedScalar<>(scalar).value());
     }
 
@@ -48,7 +53,7 @@ public final class Sqrt extends NumberEnvelope {
      * Ctor.
      * @param number Number
      */
-    public Sqrt(Double number) {
+    public Sqrt(final Double number) {
         super(() -> Math.sqrt(number));
     }
 }
