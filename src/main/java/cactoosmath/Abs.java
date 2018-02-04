@@ -24,39 +24,39 @@
 package cactoosmath;
 
 import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Returns the absolute value of an long value.
+ * Returns the absolute value.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class AbsLong implements Scalar<Long> {
+public final class Abs extends NumberEnvelope {
 
     /**
-     * Scalar.
+     * Serialization marker.
      */
-    private final Scalar<Long> scalar;
-
-    /**
-     * Ctor.
-     * @param nmbr Number
-     */
-    public AbsLong(final Long nmbr) {
-        this(() -> nmbr);
-    }
+    private static final long serialVersionUID = -638237816761275732L;
 
     /**
      * Ctor.
-     * @param sclr Scalar
+     * @param lnm Long scalar
+     * @param inm Int scalar
+     * @param fnm Float scalar
+     * @param dnm Double scalar
+     * @checkstyle ParameterNumberCheck (10 lines)
+     * @checkstyle IndentationCheck (10 lines)
      */
-    public AbsLong(final Scalar<Long> sclr) {
-        this.scalar = sclr;
-    }
-
-    @Override
-    public Long value() throws Exception {
-        return Math.abs(this.scalar.value());
+    public Abs(final Scalar<Long> lnm, final Scalar<Integer> inm,
+        final Scalar<Float> fnm, final Scalar<Double> dnm) {
+        super(
+            () -> Math.abs(new UncheckedScalar<>(lnm).value()),
+            () -> Math.abs(new UncheckedScalar<>(inm).value()),
+            () -> Math.abs(new UncheckedScalar<>(fnm).value()),
+            () -> Math.abs(new UncheckedScalar<>(dnm).value())
+        );
     }
 }
