@@ -21,62 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
-import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Returns a double value with a positive sign,
- * greater than or equal to 0.0 and less than 1.0.
+ * Returns Euler's number e raised to the power of a double value.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class Random implements Scalar<Double> {
+public final class Exp implements Scalar<Double> {
 
     /**
-     * Low bound.
+     * Scalar.
      */
-    private final double min;
-
-    /**
-     * High bound.
-     */
-    private final double max;
+    private final Scalar<Number> scalar;
 
     /**
      * Ctor.
+     * @param nmbr Number
      */
-    public Random() {
-        this(0.0, 1.0);
+    public Exp(final Number nmbr) {
+        this(() -> nmbr);
     }
 
     /**
      * Ctor.
-     * @param fst Min scalar
-     * @param snd Max scalar
+     * @param sclr Scalar
      */
-    public Random(final Scalar<Number> fst, final Scalar<Number> snd) {
-        this(
-            new UncheckedScalar<>(fst).value().doubleValue(),
-            new UncheckedScalar<>(snd).value().doubleValue()
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param fst Min number
-     * @param snd Max number
-     */
-    public Random(final double fst, final double snd) {
-        this.min = fst;
-        this.max = snd;
+    public Exp(final Scalar<Number> sclr) {
+        this.scalar = sclr;
     }
 
     @Override
     public Double value() throws Exception {
-        return Math.random() * (this.max - this.min) + this.min;
+        return Math.exp(this.scalar.value().doubleValue());
     }
 }
