@@ -21,29 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.scalar;
 
-import cactoosmath.scalar.Exp;
-import org.cactoos.ScalarHasValue;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Test case for {@link Exp}.
+ * Returns the correctly rounded positive square root of a double value.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class ExpTest {
+public final class Sqrt extends NumberEnvelope {
 
-    @Test
-    public void value() {
-        MatcherAssert.assertThat(
-            new Exp(() -> 6),
-            new ScalarHasValue<>(Math.exp(6d))
-        );
+    /**
+     * Serialization marker.
+     */
+    private static final long serialVersionUID = -1585717997308529102L;
+
+    /**
+     * Ctor.
+     * @param scalar Scalar
+     */
+    public Sqrt(final Scalar<Double> scalar) {
+        this(new UncheckedScalar<>(scalar).value());
+    }
+
+    /**
+     * Ctor.
+     * @param number Number
+     */
+    public Sqrt(final Double number) {
+        super(() -> Math.sqrt(number));
     }
 }

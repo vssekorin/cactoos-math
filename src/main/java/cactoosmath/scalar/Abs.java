@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
 import org.cactoos.scalar.NumberEnvelope;

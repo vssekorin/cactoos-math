@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
 
 /**
- * Returns the cube root of a double value.
+ * Returns the trigonometric tangent of an angle.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class Cbrt implements Scalar<Double> {
+public final class Tan implements Scalar<Double> {
 
     /**
      * Scalar.
@@ -43,7 +43,7 @@ public final class Cbrt implements Scalar<Double> {
      * Ctor.
      * @param number Number
      */
-    public Cbrt(final Double number) {
+    public Tan(final Double number) {
         this(() -> number);
     }
 
@@ -51,12 +51,12 @@ public final class Cbrt implements Scalar<Double> {
      * Ctor.
      * @param scalar Scalar
      */
-    public Cbrt(final Scalar<Double> scalar) {
+    public Tan(final Scalar<Double> scalar) {
         this.scalar = scalar;
     }
 
     @Override
     public Double value() throws Exception {
-        return Math.cbrt(this.scalar.value());
+        return Math.tan(this.scalar.value());
     }
 }

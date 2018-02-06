@@ -21,39 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
-import org.cactoos.scalar.NumberEnvelope;
-import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Returns the correctly rounded positive square root of a double value.
+ * Returns the closest long to the argument,
+ * with ties rounding to positive infinity.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class Sqrt extends NumberEnvelope {
-
+public final class Round implements Scalar<Long> {
     /**
-     * Serialization marker.
+     * Scalar.
      */
-    private static final long serialVersionUID = -1585717997308529102L;
-
-    /**
-     * Ctor.
-     * @param scalar Scalar
-     */
-    public Sqrt(final Scalar<Double> scalar) {
-        this(new UncheckedScalar<>(scalar).value());
-    }
+    private final Scalar<Double> scalar;
 
     /**
      * Ctor.
      * @param number Number
      */
-    public Sqrt(final Double number) {
-        super(() -> Math.sqrt(number));
+    public Round(final Double number) {
+        this(() -> number);
+    }
+
+    /**
+     * Ctor.
+     * @param scalar Scalar
+     */
+    public Round(final Scalar<Double> scalar) {
+        this.scalar = scalar;
+    }
+
+    @Override
+    public Long value() throws Exception {
+        return Math.round(this.scalar.value());
     }
 }

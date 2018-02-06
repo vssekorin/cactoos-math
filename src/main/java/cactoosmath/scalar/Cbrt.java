@@ -21,19 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
 
 /**
- * Returns the closest long to the argument,
- * with ties rounding to positive infinity.
+ * Returns the cube root of a double value.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class Round implements Scalar<Long> {
+public final class Cbrt implements Scalar<Double> {
+
     /**
      * Scalar.
      */
@@ -43,7 +43,7 @@ public final class Round implements Scalar<Long> {
      * Ctor.
      * @param number Number
      */
-    public Round(final Double number) {
+    public Cbrt(final Double number) {
         this(() -> number);
     }
 
@@ -51,12 +51,12 @@ public final class Round implements Scalar<Long> {
      * Ctor.
      * @param scalar Scalar
      */
-    public Round(final Scalar<Double> scalar) {
+    public Cbrt(final Scalar<Double> scalar) {
         this.scalar = scalar;
     }
 
     @Override
-    public Long value() throws Exception {
-        return Math.round(this.scalar.value());
+    public Double value() throws Exception {
+        return Math.cbrt(this.scalar.value());
     }
 }

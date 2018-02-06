@@ -21,42 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
-
-import org.cactoos.Scalar;
 
 /**
- * Returns the trigonometric tangent of an angle.
+ * Scalars.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class Tan implements Scalar<Double> {
-
-    /**
-     * Scalar.
-     */
-    private final Scalar<Double> scalar;
-
-    /**
-     * Ctor.
-     * @param number Number
-     */
-    public Tan(final Double number) {
-        this(() -> number);
-    }
-
-    /**
-     * Ctor.
-     * @param scalar Scalar
-     */
-    public Tan(final Scalar<Double> scalar) {
-        this.scalar = scalar;
-    }
-
-    @Override
-    public Double value() throws Exception {
-        return Math.tan(this.scalar.value());
-    }
-}
+package cactoosmath.scalar;
