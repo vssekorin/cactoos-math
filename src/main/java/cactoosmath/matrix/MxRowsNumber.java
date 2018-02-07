@@ -46,7 +46,7 @@ public final class MxRowsNumber<T> implements Scalar<Integer> {
      * @param mtrx Matrix.
      */
     public MxRowsNumber(final Matrix<T> mtrx) {
-        this(mtrx.asArray());
+        this(new UncheckedMatrix<>(mtrx).asArray());
     }
 
     /**

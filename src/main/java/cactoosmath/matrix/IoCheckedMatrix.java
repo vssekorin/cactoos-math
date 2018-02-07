@@ -21,23 +21,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.matrix;
+
+import cactoosmath.Matrix;
+import java.io.IOException;
 
 /**
- * Matrix.
+ * Matrix that doesn't throw checked {@link Exception},
+ * but throws {@link IOException} instead.
+ *
+ * <p> There is no thread-safety guarantee.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Matrix type
+ * @param <T> Type of matrix
  * @since 0.1
  */
-public interface Matrix<T> {
+public final class IoCheckedMatrix<T> implements Matrix<T> {
 
     /**
-     * Convert it to array.
-     *
-     * @return Array
-     * @throws Exception If fails
+     * Origin matrix.
      */
-    T[][] asArray() throws Exception;
+    private final Matrix<T> origin;
+
+    /**
+     * Ctor.
+     * @param matrix Origin matrix
+     */
+    public IoCheckedMatrix(final Matrix<T> matrix) {
+        this.origin = matrix;
+    }
+
+    @Override
+    @SuppressWarnings
+        (
+            {
+                "PMD.AvoidCatchingGenericException",
+                "PMD.AvoidRethrowingException"
+            }
+        )
+    public T[][] asArray() throws IOException {
+        try {
+            return this.origin.asArray();
+            //@checkstyle IllegalCatchCheck (1 line)
+        } catch (final IOException | RuntimeException exc) {
+            throw exc;
+        } catch (final InterruptedException exc) {
+            Thread.currentThread().interrupt();
+            throw new IOException(exc);
+            //@checkstyle IllegalCatchCheck (1 line)
+        } catch (final Exception exc) {
+            throw new IOException(exc);
+        }
+    }
 }
