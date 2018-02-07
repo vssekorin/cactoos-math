@@ -51,7 +51,10 @@ public final class BoolMxMult implements Matrix<Boolean> {
      * @param scnd Second matrix.
      */
     public BoolMxMult(final Matrix<Boolean> frst, final Matrix<Boolean> scnd) {
-        this(frst.asArray(), scnd.asArray());
+        this(
+            new UncheckedMatrix<>(frst).asArray(),
+            new UncheckedMatrix<>(scnd).asArray()
+        );
     }
 
     /**

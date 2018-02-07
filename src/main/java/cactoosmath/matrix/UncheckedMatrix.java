@@ -21,23 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.matrix;
+
+import cactoosmath.Matrix;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 
 /**
- * Matrix.
+ * Matrix that doesn't throw checked {@link Exception}.
+ *
+ * <p> There is no thread-safety guarantee.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Matrix type
+ * @param <T> Type of matrix
  * @since 0.1
  */
-public interface Matrix<T> {
+public final class UncheckedMatrix<T> implements Matrix<T> {
 
     /**
-     * Convert it to array.
-     *
-     * @return Array
-     * @throws Exception If fails
+     * Origin matrix.
      */
-    T[][] asArray() throws Exception;
+    private final Matrix<T> origin;
+
+    /**
+     * Ctor.
+     * @param matrix Origin matrix
+     */
+    public UncheckedMatrix(final Matrix<T> matrix) {
+        this.origin = matrix;
+    }
+
+    @Override
+    public T[][] asArray() {
+        try {
+            return new IoCheckedMatrix<>(this.origin).asArray();
+        } catch (final IOException exc) {
+            throw new UncheckedIOException(exc);
+        }
+    }
 }
