@@ -24,42 +24,63 @@
 package cactoosmath.matrix;
 
 import cactoosmath.Matrix;
-import org.cactoos.Scalar;
+import org.cactoos.BiFunc;
 
 /**
- * Number of row.
+ * Matrix addition.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of matrix
+ * @param <X> Type of first matrix
+ * @param <Y> Type of second matrix
+ * @param <Z> Type of result matrix
  * @since 0.1
  */
-public final class MxRowsNumber<T> implements Scalar<Integer> {
+public final class MatrixAdd<X, Y, Z> implements Matrix<Z> {
 
     /**
-     * Matrix.
+     * First matrix.
      */
-    private final T[][] matrix;
+    private final Matrix<X> first;
+
+    /**
+     * Second matrix.
+     */
+    private final Matrix<Y> second;
+
+    /**
+     * Addition.
+     */
+    private final BiFunc<X, Y, Z> add;
 
     /**
      * Ctor.
-     * @param mtrx Matrix.
+     * @param fst First matrix
+     * @param snd Second matrix
+     * @param func Addition
      */
-    public MxRowsNumber(final Matrix<T> mtrx) {
-        this(new UncheckedMatrix<>(mtrx).asArray());
-    }
-
-    /**
-     * Ctor.
-     * @param mtrx Matrix.
-     */
-    @SuppressWarnings("PMD.UseVarargs")
-    public MxRowsNumber(final T[][] mtrx) {
-        this.matrix = mtrx.clone();
+    public MatrixAdd(final Matrix<X> fst, final Matrix<Y> snd,
+        final BiFunc<X, Y, Z> func) {
+        this.first = fst;
+        this.second = snd;
+        this.add = func;
     }
 
     @Override
-    public Integer value() throws Exception {
-        return this.matrix.length;
+    public Z[][] asArray() throws Exception {
+        final int rows = new RowsNumber<>(this.first).value();
+        final int cols = new ColumnNumber<>(this.first).value();
+        final X[][] left = this.first.asArray();
+        final Y[][] right = this.second.asArray();
+        final Z[][] result = (Z[][]) new Object[rows][cols];
+        for (int row = 0; row < rows; ++row) {
+            for (int col = 0; col < cols; ++col) {
+                result[row][col] = this.add.apply(
+                    left[row][col],
+                    right[row][col]
+                );
+            }
+        }
+        return result;
     }
 }

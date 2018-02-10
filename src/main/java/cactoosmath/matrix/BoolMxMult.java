@@ -71,7 +71,7 @@ public final class BoolMxMult implements Matrix<Boolean> {
     @Override
     public Boolean[][] asArray() {
         final int size = new UncheckedScalar<>(
-            new MxRowsNumber<>(this.first)
+            new RowsNumber<>(this.first)
         ).value();
         final Boolean[][] result = new Boolean[size][size];
         //@checkstyle NestedForDepthCheck (10 lines)
