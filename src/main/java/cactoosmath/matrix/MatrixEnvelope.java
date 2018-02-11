@@ -24,49 +24,36 @@
 package cactoosmath.matrix;
 
 import cactoosmath.Matrix;
-import org.cactoos.BiFunc;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Matrix addition.
+ * Matrix envelope.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <X> Type of first matrix
- * @param <Y> Type of second matrix
- * @param <Z> Type of result matrix
+ * @param <T> Type of matrix
  * @since 0.1
+ * @checkstyle AbstractClassNameCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-    }
-)
-public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
+@SuppressWarnings("PMD.AbstractNaming")
+public abstract class MatrixEnvelope<T> implements Matrix<T> {
+
+    /**
+     * The matrix.
+     */
+    private final UncheckedScalar<Matrix<T>> origin;
 
     /**
      * Ctor.
-     * @param first First matrix
-     * @param second Second matrix
-     * @param add Addition
+     * @param matrix The source
      */
-    public MatrixAdd(final Matrix<X> first, final Matrix<Y> second,
-        final BiFunc<X, Y, Z> add) {
-        super(() -> {
-            final int rows = new RowsNumber<>(first).value();
-            final int cols = new ColumnNumber<>(first).value();
-            final X[][] left = first.asArray();
-            final Y[][] right = second.asArray();
-            final Z[][] result = (Z[][]) new Object[rows][cols];
-            for (int row = 0; row < rows; ++row) {
-                for (int col = 0; col < cols; ++col) {
-                    result[row][col] = add.apply(
-                        left[row][col],
-                        right[row][col]
-                    );
-                }
-            }
-            return new MatrixOf<>(result);
-        });
+    public MatrixEnvelope(final Scalar<Matrix<T>> matrix) {
+        this.origin = new UncheckedScalar<>(matrix);
+    }
+
+    @Override
+    public final T[][] asArray() throws Exception {
+        return this.origin.value().asArray();
     }
 }
