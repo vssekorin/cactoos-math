@@ -50,6 +50,6 @@ public final class MatrixOf<T> implements Matrix<T> {
 
     @Override
     public T[][] asArray() throws Exception {
-        return origin;
+        return this.origin;
     }
 }
