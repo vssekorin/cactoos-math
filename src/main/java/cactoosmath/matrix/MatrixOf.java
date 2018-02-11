@@ -44,8 +44,9 @@ public final class MatrixOf<T> implements Matrix<T> {
      * Ctor.
      * @param array Array
      */
+    @SuppressWarnings("PMD.UseVarargs")
     public MatrixOf(final T[][] array) {
-        this.origin = array;
+        this.origin = array.clone();
     }
 
     @Override
