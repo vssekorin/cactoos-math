@@ -23,8 +23,6 @@
  */
 package cactoosmath.matrix;
 
-import cactoosmath.Matrix;
-
 /**
  * Array as matrix.
  *
@@ -33,12 +31,7 @@ import cactoosmath.Matrix;
  * @param <T> Type of matrix
  * @since 0.1
  */
-public final class MatrixOf<T> implements Matrix<T> {
-
-    /**
-     * Origin matrix.
-     */
-    private final T[][] origin;
+public final class MatrixOf<T> extends MatrixEnvelope<T> {
 
     /**
      * Ctor.
@@ -46,11 +39,6 @@ public final class MatrixOf<T> implements Matrix<T> {
      */
     @SuppressWarnings("PMD.UseVarargs")
     public MatrixOf(final T[][] array) {
-        this.origin = array.clone();
-    }
-
-    @Override
-    public T[][] asArray() throws Exception {
-        return this.origin.clone();
+        super(() -> new MatrixOf<>(array));
     }
 }
