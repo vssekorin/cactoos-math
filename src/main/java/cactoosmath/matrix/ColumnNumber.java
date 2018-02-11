@@ -34,7 +34,7 @@ import org.cactoos.Scalar;
  * @param <T> Type of matrix
  * @since 0.1
  */
-public final class MxColumnNumber<T> implements Scalar<Integer> {
+public final class ColumnNumber<T> implements Scalar<Integer> {
 
     /**
      * Matrix.
@@ -45,7 +45,7 @@ public final class MxColumnNumber<T> implements Scalar<Integer> {
      * Ctor.
      * @param mtrx Matrix.
      */
-    public MxColumnNumber(final Matrix<T> mtrx) {
+    public ColumnNumber(final Matrix<T> mtrx) {
         this(new UncheckedMatrix<>(mtrx).asArray());
     }
 
@@ -54,7 +54,7 @@ public final class MxColumnNumber<T> implements Scalar<Integer> {
      * @param mtrx Matrix.
      */
     @SuppressWarnings("PMD.UseVarargs")
-    public MxColumnNumber(final T[][] mtrx) {
+    public ColumnNumber(final T[][] mtrx) {
         this.matrix = mtrx.clone();
     }
 

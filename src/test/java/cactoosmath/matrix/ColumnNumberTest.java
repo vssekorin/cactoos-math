@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link MxColumnNumber}.
+ * Test case for {@link ColumnNumber}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -37,12 +37,12 @@ import org.junit.Test;
  * @checkstyle MagicNumberCheck (500 lines)
  * @checkstyle ArrayTrailingCommaCheck (500 lines)
  */
-public final class MxColumnNumberTest {
+public final class ColumnNumberTest {
 
     @Test
     public void value() {
         MatcherAssert.assertThat(
-            new MxColumnNumber<>(
+            new ColumnNumber<>(
                 new Integer[][]{
                     {1, 2, 3},
                     {4, 5, 6}
