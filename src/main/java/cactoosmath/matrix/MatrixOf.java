@@ -39,6 +39,6 @@ public final class MatrixOf<T> extends MatrixEnvelope<T> {
      */
     @SuppressWarnings("PMD.UseVarargs")
     public MatrixOf(final T[][] array) {
-        super(() -> new MatrixOf<>(array));
+        super(() -> () -> array);
     }
 }
