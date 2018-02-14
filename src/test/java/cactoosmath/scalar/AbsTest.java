@@ -23,42 +23,26 @@
  */
 package cactoosmath.scalar;
 
-import org.cactoos.Scalar;
-import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.ScalarHasValue;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Returns the absolute value.
+ * Test case for {@link Exp}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class Abs extends NumberEnvelope {
+public final class AbsTest {
 
-    /**
-     * Serialization marker.
-     */
-    private static final long serialVersionUID = -638237816761275732L;
-
-    /**
-     * Ctor.
-     * @param nmb Number
-     */
-    public Abs(final Number nmb) {
-        this(() -> nmb);
-    }
-
-    /**
-     * Ctor.
-     * @param scl Scalar
-     * @checkstyle IndentationCheck (10 lines)
-     */
-    public Abs(final Scalar<Number> scl) {
-        super(
-            () -> Math.abs(scl.value().longValue()),
-            () -> Math.abs(scl.value().intValue()),
-            () -> Math.abs(scl.value().floatValue()),
-            () -> Math.abs(scl.value().doubleValue())
+    @Test
+    public void value() {
+        MatcherAssert.assertThat(
+            new Abs(() -> -6),
+            new ScalarHasValue<>(6.0)
         );
     }
 }

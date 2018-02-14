@@ -21,44 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath.scalar;
-
-import org.cactoos.Scalar;
-import org.cactoos.scalar.NumberEnvelope;
 
 /**
- * Returns the absolute value.
+ * Tests for scalars.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class Abs extends NumberEnvelope {
-
-    /**
-     * Serialization marker.
-     */
-    private static final long serialVersionUID = -638237816761275732L;
-
-    /**
-     * Ctor.
-     * @param nmb Number
-     */
-    public Abs(final Number nmb) {
-        this(() -> nmb);
-    }
-
-    /**
-     * Ctor.
-     * @param scl Scalar
-     * @checkstyle IndentationCheck (10 lines)
-     */
-    public Abs(final Scalar<Number> scl) {
-        super(
-            () -> Math.abs(scl.value().longValue()),
-            () -> Math.abs(scl.value().intValue()),
-            () -> Math.abs(scl.value().floatValue()),
-            () -> Math.abs(scl.value().doubleValue())
-        );
-    }
-}
+package cactoosmath.scalar;
