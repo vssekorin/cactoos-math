@@ -35,7 +35,6 @@ import org.junit.Test;
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
- * @checkstyle ArrayTrailingCommaCheck (500 lines)
  */
 public final class RowsNumberTest {
 
@@ -45,7 +44,7 @@ public final class RowsNumberTest {
             new RowsNumber<>(
                 new Integer[][]{
                     {1, 2, 3},
-                    {4, 5, 6}
+                    {4, 5, 6},
                 }
             ),
             new ScalarHasValue<>(2)
