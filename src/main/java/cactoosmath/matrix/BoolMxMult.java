@@ -77,6 +77,7 @@ public final class BoolMxMult implements Matrix<Boolean> {
         //@checkstyle NestedForDepthCheck (10 lines)
         for (int row = 0; row < size; ++row) {
             for (int col = 0; col < size; ++col) {
+                result[row][col] = false;
                 for (int inner = 0; inner < size; ++inner) {
                     result[row][col] = result[row][col]
                         || this.first[row][inner] && this.second[inner][col];

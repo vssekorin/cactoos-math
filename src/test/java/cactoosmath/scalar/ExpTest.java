@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath.matrix;
+package cactoosmath.scalar;
 
 import org.cactoos.ScalarHasValue;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link ColumnNumber}.
+ * Test case for {@link Exp}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -36,18 +36,13 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class ColumnNumberTest {
+public final class ExpTest {
 
     @Test
     public void value() {
         MatcherAssert.assertThat(
-            new ColumnNumber<>(
-                new Integer[][]{
-                    {1, 2, 3},
-                    {4, 5, 6},
-                }
-            ),
-            new ScalarHasValue<>(3)
+            new Exp(() -> 6),
+            new ScalarHasValue<>(Math.exp(6d))
         );
     }
 }

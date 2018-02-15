@@ -25,7 +25,6 @@ package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
 import org.cactoos.scalar.NumberEnvelope;
-import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Returns the absolute value.
@@ -43,20 +42,23 @@ public final class Abs extends NumberEnvelope {
 
     /**
      * Ctor.
-     * @param lnm Long scalar
-     * @param inm Int scalar
-     * @param fnm Float scalar
-     * @param dnm Double scalar
-     * @checkstyle ParameterNumberCheck (10 lines)
+     * @param nmb Number
+     */
+    public Abs(final Number nmb) {
+        this(() -> nmb);
+    }
+
+    /**
+     * Ctor.
+     * @param scl Scalar
      * @checkstyle IndentationCheck (10 lines)
      */
-    public Abs(final Scalar<Long> lnm, final Scalar<Integer> inm,
-        final Scalar<Float> fnm, final Scalar<Double> dnm) {
+    public Abs(final Scalar<Number> scl) {
         super(
-            () -> Math.abs(new UncheckedScalar<>(lnm).value()),
-            () -> Math.abs(new UncheckedScalar<>(inm).value()),
-            () -> Math.abs(new UncheckedScalar<>(fnm).value()),
-            () -> Math.abs(new UncheckedScalar<>(dnm).value())
+            () -> Math.abs(scl.value().longValue()),
+            () -> Math.abs(scl.value().intValue()),
+            () -> Math.abs(scl.value().floatValue()),
+            () -> Math.abs(scl.value().doubleValue())
         );
     }
 }
