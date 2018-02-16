@@ -24,6 +24,8 @@
 package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Returns the trigonometric tangent of an angle.
@@ -32,31 +34,26 @@ import org.cactoos.Scalar;
  * @version $Id$
  * @since 0.1
  */
-public final class Tan implements Scalar<Double> {
+public final class Tan extends NumberEnvelope {
 
     /**
-     * Scalar.
+     * Serialization marker.
      */
-    private final Scalar<Double> scalar;
+    private static final long serialVersionUID = 8881837454473800803L;
 
     /**
      * Ctor.
-     * @param number Number
+     * @param scl Scalar
      */
-    public Tan(final Double number) {
-        this(() -> number);
+    public Tan(final Scalar<Number> scl) {
+        this(new UncheckedScalar<>(scl).value());
     }
 
     /**
      * Ctor.
-     * @param scalar Scalar
+     * @param nmb Number
      */
-    public Tan(final Scalar<Double> scalar) {
-        this.scalar = scalar;
-    }
-
-    @Override
-    public Double value() throws Exception {
-        return Math.tan(this.scalar.value());
+    public Tan(final Number nmb) {
+        super(() -> Math.tan(nmb.doubleValue()));
     }
 }

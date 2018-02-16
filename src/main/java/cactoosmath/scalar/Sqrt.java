@@ -43,17 +43,17 @@ public final class Sqrt extends NumberEnvelope {
 
     /**
      * Ctor.
-     * @param scalar Scalar
+     * @param scl Scalar
      */
-    public Sqrt(final Scalar<Double> scalar) {
-        this(new UncheckedScalar<>(scalar).value());
+    public Sqrt(final Scalar<Number> scl) {
+        this(new UncheckedScalar<>(scl).value());
     }
 
     /**
      * Ctor.
      * @param number Number
      */
-    public Sqrt(final Double number) {
-        super(() -> Math.sqrt(number));
+    public Sqrt(final Number number) {
+        super(() -> Math.sqrt(number.doubleValue()));
     }
 }

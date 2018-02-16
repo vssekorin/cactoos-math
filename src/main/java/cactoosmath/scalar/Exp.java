@@ -24,6 +24,8 @@
 package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Returns Euler's number e raised to the power of a double value.
@@ -32,31 +34,26 @@ import org.cactoos.Scalar;
  * @version $Id$
  * @since 0.1
  */
-public final class Exp implements Scalar<Double> {
+public final class Exp extends NumberEnvelope {
 
     /**
-     * Scalar.
+     * Serialization marker.
      */
-    private final Scalar<Number> scalar;
+    private static final long serialVersionUID = 8017027119878549450L;
 
     /**
      * Ctor.
-     * @param nmbr Number
+     * @param scl Scalar
      */
-    public Exp(final Number nmbr) {
-        this(() -> nmbr);
+    public Exp(final Scalar<Number> scl) {
+        this(new UncheckedScalar<>(scl).value());
     }
 
     /**
      * Ctor.
-     * @param sclr Scalar
+     * @param nmb Number
      */
-    public Exp(final Scalar<Number> sclr) {
-        this.scalar = sclr;
-    }
-
-    @Override
-    public Double value() throws Exception {
-        return Math.exp(this.scalar.value().doubleValue());
+    public Exp(final Number nmb) {
+        super(() -> Math.exp(nmb.doubleValue()));
     }
 }

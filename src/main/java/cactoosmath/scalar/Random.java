@@ -24,6 +24,7 @@
 package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
@@ -34,17 +35,12 @@ import org.cactoos.scalar.UncheckedScalar;
  * @version $Id$
  * @since 0.1
  */
-public final class Random implements Scalar<Double> {
+public final class Random extends NumberEnvelope {
 
     /**
-     * Low bound.
+     * Serialization marker.
      */
-    private final double min;
-
-    /**
-     * High bound.
-     */
-    private final double max;
+    private static final long serialVersionUID = -2140462367459861873L;
 
     /**
      * Ctor.
@@ -55,28 +51,22 @@ public final class Random implements Scalar<Double> {
 
     /**
      * Ctor.
-     * @param fst Min scalar
-     * @param snd Max scalar
+     * @param min Min scalar
+     * @param max Max scalar
      */
-    public Random(final Scalar<Number> fst, final Scalar<Number> snd) {
+    public Random(final Scalar<Number> min, final Scalar<Number> max) {
         this(
-            new UncheckedScalar<>(fst).value().doubleValue(),
-            new UncheckedScalar<>(snd).value().doubleValue()
+            new UncheckedScalar<>(min).value().doubleValue(),
+            new UncheckedScalar<>(max).value().doubleValue()
         );
     }
 
     /**
      * Ctor.
-     * @param fst Min number
-     * @param snd Max number
+     * @param min Min number
+     * @param max Max number
      */
-    public Random(final double fst, final double snd) {
-        this.min = fst;
-        this.max = snd;
-    }
-
-    @Override
-    public Double value() throws Exception {
-        return Math.random() * (this.max - this.min) + this.min;
+    public Random(final double min, final double max) {
+        super(() -> Math.random() * (max - min) + min);
     }
 }

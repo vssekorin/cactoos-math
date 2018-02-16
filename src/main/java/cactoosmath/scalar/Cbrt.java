@@ -24,6 +24,8 @@
 package cactoosmath.scalar;
 
 import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Returns the cube root of a double value.
@@ -32,31 +34,26 @@ import org.cactoos.Scalar;
  * @version $Id$
  * @since 0.1
  */
-public final class Cbrt implements Scalar<Double> {
+public final class Cbrt extends NumberEnvelope {
 
     /**
-     * Scalar.
+     * Serialization marker.
      */
-    private final Scalar<Double> scalar;
+    private static final long serialVersionUID = 3213002033346539682L;
 
     /**
      * Ctor.
-     * @param number Number
+     * @param scl Scalar
      */
-    public Cbrt(final Double number) {
-        this(() -> number);
+    public Cbrt(final Scalar<Number> scl) {
+        this(new UncheckedScalar<>(scl).value());
     }
 
     /**
      * Ctor.
-     * @param scalar Scalar
+     * @param nmb Number
      */
-    public Cbrt(final Scalar<Double> scalar) {
-        this.scalar = scalar;
-    }
-
-    @Override
-    public Double value() throws Exception {
-        return Math.cbrt(this.scalar.value());
+    public Cbrt(final Number nmb) {
+        super(() -> Math.cbrt(nmb.doubleValue()));
     }
 }
