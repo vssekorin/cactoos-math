@@ -21,29 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package cactoosmath;
+package cactoosmath.matrix;
 
-import cactoosmath.scalar.Exp;
-import org.cactoos.ScalarHasValue;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link Exp}.
+ * Test case for {@link BoolMxMult}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class ExpTest {
+public final class BoolMxMultTest {
 
     @Test
-    public void value() {
+    public void asArray() throws Exception {
         MatcherAssert.assertThat(
-            new Exp(() -> 6),
-            new ScalarHasValue<>(Math.exp(6d))
+            new BoolMxMult(
+                new MatrixOf<>(
+                    new Boolean[][]{
+                        {false, false},
+                        {true, true},
+                    }
+                ),
+                new MatrixOf<>(
+                    new Boolean[][]{
+                        {true, false},
+                        {true, false},
+                    }
+                )
+            ).asArray(),
+            CoreMatchers.equalTo(
+                new Boolean[][]{
+                    {false, false},
+                    {true, false},
+                }
+            )
         );
     }
 }
