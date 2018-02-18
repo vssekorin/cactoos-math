@@ -23,7 +23,9 @@
  */
 package cactoosmath.iterable;
 
+import cactoosmath.func.BiFuncFunc;
 import org.cactoos.BiFunc;
+import org.cactoos.Func;
 import org.cactoos.iterable.IterableEnvelope;
 
 /**
@@ -40,11 +42,21 @@ public final class BiSeq<T> extends IterableEnvelope<T> {
      * Ctor.
      * @param first First element
      * @param second Second element
-     * @param func Increment function
+     * @param fnc Increment function
      */
-    public BiSeq(final T first, final T second, final BiFunc<T, T, T> func) {
+    public BiSeq(final T first, final T second, final BiFunc<T, T, T> fnc) {
+        this(first, second, new BiFuncFunc<>(fnc));
+    }
+
+    /**
+     * Ctor.
+     * @param first First element
+     * @param second Second element
+     * @param fnc Increment function
+     */
+    public BiSeq(final T first, final T second, final Func<T, Func<T, T>> fnc) {
         super(() -> () -> new cactoosmath.iterator.BiSeq<>(
-            first, second, func
+            first, second, fnc
             )
         );
     }
