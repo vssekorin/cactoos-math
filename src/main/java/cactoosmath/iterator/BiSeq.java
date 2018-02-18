@@ -23,10 +23,12 @@
  */
 package cactoosmath.iterator;
 
+import cactoosmath.func.BiFuncFunc;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.cactoos.BiFunc;
-import org.cactoos.func.UncheckedBiFunc;
+import org.cactoos.Func;
+import org.cactoos.func.UncheckedFunc;
 
 /**
  * BiSequence.
@@ -51,7 +53,7 @@ public final class BiSeq<T> implements Iterator<T> {
     /**
      * Increment function.
      */
-    private final UncheckedBiFunc<T, T, T> inc;
+    private final UncheckedFunc<T, Func<T, T>> inc;
 
     /**
      * Previous element.
@@ -67,12 +69,22 @@ public final class BiSeq<T> implements Iterator<T> {
      * Ctor.
      * @param first First element
      * @param second Second element
-     * @param func Increment function
+     * @param fnc Increment function
      */
-    public BiSeq(final T first, final T second, final BiFunc<T, T, T> func) {
+    public BiSeq(final T first, final T second, final BiFunc<T, T, T> fnc) {
+        this(first, second, new BiFuncFunc<>(fnc));
+    }
+
+    /**
+     * Ctor.
+     * @param first First element
+     * @param second Second element
+     * @param fnc Increment function
+     */
+    public BiSeq(final T first, final T second, final Func<T, Func<T, T>> fnc) {
         this.first = first;
         this.second = second;
-        this.inc = new UncheckedBiFunc<>(func);
+        this.inc = new UncheckedFunc<>(fnc);
     }
 
     @Override
@@ -95,7 +107,9 @@ public final class BiSeq<T> implements Iterator<T> {
                 this.prevs = this.second;
             }
         } else {
-            result = this.inc.apply(this.prevf, this.prevs);
+            result = new UncheckedFunc<>(
+                this.inc.apply(this.prevf)
+            ).apply(this.prevs);
             this.prevf = this.prevs;
             this.prevs = result;
         }
