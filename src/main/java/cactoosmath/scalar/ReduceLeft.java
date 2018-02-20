@@ -55,8 +55,7 @@ public final class ReduceLeft<T> implements Scalar<T> {
      * @param fnc Function
      */
     public ReduceLeft(final Iterable<T> src, final BiFunc<T, T, T> fnc) {
-        this.items = src;
-        this.func = new BiFuncFunc<>(fnc);
+        this(src, new BiFuncFunc<>(fnc));
     }
 
     /**
