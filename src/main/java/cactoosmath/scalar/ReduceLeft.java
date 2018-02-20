@@ -23,7 +23,9 @@
  */
 package cactoosmath.scalar;
 
+import cactoosmath.func.BiFuncFunc;
 import java.util.Iterator;
+import org.cactoos.BiFunc;
 import org.cactoos.Func;
 import org.cactoos.Scalar;
 
@@ -46,6 +48,16 @@ public final class ReduceLeft<T> implements Scalar<T> {
      * Function of two arguments.
      */
     private final Func<T, Func<T, T>> func;
+
+    /**
+     * Ctor.
+     * @param src Source items
+     * @param fnc Function
+     */
+    public ReduceLeft(final Iterable<T> src, final BiFunc<T, T, T> fnc) {
+        this.items = src;
+        this.func = new BiFuncFunc<>(fnc);
+    }
 
     /**
      * Ctor.
