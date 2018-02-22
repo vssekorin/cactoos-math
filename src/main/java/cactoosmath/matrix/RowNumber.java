@@ -23,31 +23,43 @@
  */
 package cactoosmath.matrix;
 
-import org.cactoos.ScalarHasValue;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import cactoosmath.Matrix;
+import org.cactoos.Scalar;
 
 /**
- * Test case for {@link RowsNumber}.
+ * Number of row.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
+ * @param <T> Type of matrix
  * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class RowsNumberTest {
+public final class RowNumber<T> implements Scalar<Integer> {
 
-    @Test
-    public void value() {
-        MatcherAssert.assertThat(
-            new RowsNumber<>(
-                new Integer[][]{
-                    {1, 2, 3},
-                    {4, 5, 6},
-                }
-            ),
-            new ScalarHasValue<>(2)
-        );
+    /**
+     * Matrix.
+     */
+    private final T[][] matrix;
+
+    /**
+     * Ctor.
+     * @param mtrx Matrix.
+     */
+    public RowNumber(final Matrix<T> mtrx) {
+        this(new UncheckedMatrix<>(mtrx).asArray());
+    }
+
+    /**
+     * Ctor.
+     * @param mtrx Matrix.
+     */
+    @SuppressWarnings("PMD.UseVarargs")
+    public RowNumber(final T[][] mtrx) {
+        this.matrix = mtrx.clone();
+    }
+
+    @Override
+    public Integer value() throws Exception {
+        return this.matrix.length;
     }
 }
