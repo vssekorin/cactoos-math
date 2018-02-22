@@ -23,50 +23,31 @@
  */
 package cactoosmath.matrix;
 
-import cactoosmath.Matrix;
-import org.cactoos.BiFunc;
+import org.cactoos.ScalarHasValue;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Matrix addition.
+ * Test case for {@link RowNumber}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <X> Type of first matrix
- * @param <Y> Type of second matrix
- * @param <Z> Type of result matrix
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-    }
-)
-public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
+public final class RowNumberTest {
 
-    /**
-     * Ctor.
-     * @param first First matrix
-     * @param second Second matrix
-     * @param add Addition
-     */
-    public MatrixAdd(final Matrix<X> first, final Matrix<Y> second,
-        final BiFunc<X, Y, Z> add) {
-        super(() -> {
-            final int rows = new RowNumber<>(first).value();
-            final int cols = new ColumnNumber<>(first).value();
-            final X[][] left = first.asArray();
-            final Y[][] right = second.asArray();
-            final Z[][] result = (Z[][]) new Object[rows][cols];
-            for (int row = 0; row < rows; ++row) {
-                for (int col = 0; col < cols; ++col) {
-                    result[row][col] = add.apply(
-                        left[row][col],
-                        right[row][col]
-                    );
+    @Test
+    public void value() {
+        MatcherAssert.assertThat(
+            new RowNumber<>(
+                new Integer[][]{
+                    {1, 2, 3},
+                    {4, 5, 6},
                 }
-            }
-            return new MatrixOf<>(result);
-        });
+            ),
+            new ScalarHasValue<>(2)
+        );
     }
 }
