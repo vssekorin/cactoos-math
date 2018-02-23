@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/VsSekorin/cactoos-math.svg?branch=master)](https://travis-ci.org/VsSekorin/cactoos-math)
 
-Addition to the [Cactoos](https://github.com/yegor256/cactoos) containing mathematical objects.
+Extension of [Cactoos](https://github.com/yegor256/cactoos). Added classes for mathematical objects.
 
 ## Seq
 
@@ -46,7 +46,7 @@ mvn clean install -Pqulice
 
 ## MIT License
 
-Copyright (c) 2017 Vseslav Sekorin
+Copyright (c) 2017-2018 Vseslav Sekorin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
