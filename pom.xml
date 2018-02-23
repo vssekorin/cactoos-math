@@ -4,15 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.cactoos</groupId>
+  <groupId>com.vssekorin</groupId>
   <artifactId>cactoos-math</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <url>https://github.com/VsSekorin/cactoos-math</url>
-  <organization>
-    <name>Cactoos</name>
-    <url>https://github.com/yegor256/cactoos</url>
-  </organization>
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/VsSekorin/cactoos-math/issues</url>
