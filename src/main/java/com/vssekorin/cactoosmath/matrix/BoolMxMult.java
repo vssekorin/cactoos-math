@@ -29,8 +29,12 @@ import org.cactoos.scalar.UncheckedScalar;
 /**
  * Multiplication of two boolean matrix.
  *
+ * This was created for better performance. It was supposed that this would be
+ * useful for jpeek.org. Now this should be removed.
+ *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
+ * @see MatrixMult
  * @since 0.1
  */
 public final class BoolMxMult implements Matrix<Boolean> {
