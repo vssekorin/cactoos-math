@@ -21,45 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.func;
+package com.vssekorin.cactoosmath.scalar;
 
-import org.cactoos.BiFunc;
-import org.cactoos.Func;
+import com.vssekorin.cactoosmath.iterable.Seq;
+import org.cactoos.iterable.Limited;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Partial function application.
+ * Test case for {@link ReduceLeft}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <X> First input type
- * @param <Y> Second input type
- * @param <Z> Result type
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class PartApply<X, Y, Z> implements Func<Y, Z> {
+public final class ReduceLeftTest {
 
-    /**
-     * Origin function.
-     */
-    private final BiFunc<X, Y, Z> func;
-
-    /**
-     * First argument.
-     */
-    private final X first;
-
-    /**
-     * Ctor.
-     * @param fnc Function of two arguments
-     * @param arg First argument
-     */
-    public PartApply(final BiFunc<X, Y, Z> fnc, final X arg) {
-        this.func = fnc;
-        this.first = arg;
-    }
-
-    @Override
-    public Z apply(final Y input) throws Exception {
-        return this.func.apply(this.first, input);
+    @Test
+    public void value() throws Exception {
+        MatcherAssert.assertThat(
+            new ReduceLeft<>(
+                new Limited<>(
+                    5,
+                    new Seq<>(1, a -> a + 1)
+                ),
+                fst -> snd -> fst * snd
+            ).value(),
+            CoreMatchers.equalTo(120)
+        );
     }
 }

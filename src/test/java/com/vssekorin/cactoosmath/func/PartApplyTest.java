@@ -24,42 +24,27 @@
 package com.vssekorin.cactoosmath.func;
 
 import org.cactoos.BiFunc;
-import org.cactoos.Func;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Partial function application.
+ * Test case for {@link PartApply}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <X> First input type
- * @param <Y> Second input type
- * @param <Z> Result type
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class PartApply<X, Y, Z> implements Func<Y, Z> {
+public final class PartApplyTest {
 
-    /**
-     * Origin function.
-     */
-    private final BiFunc<X, Y, Z> func;
-
-    /**
-     * First argument.
-     */
-    private final X first;
-
-    /**
-     * Ctor.
-     * @param fnc Function of two arguments
-     * @param arg First argument
-     */
-    public PartApply(final BiFunc<X, Y, Z> fnc, final X arg) {
-        this.func = fnc;
-        this.first = arg;
-    }
-
-    @Override
-    public Z apply(final Y input) throws Exception {
-        return this.func.apply(this.first, input);
+    @Test
+    public void applyForBiFunc() throws Exception {
+        final BiFunc<Integer, Long, Long> func = (fst, snd) -> fst + snd;
+        MatcherAssert.assertThat(
+            new PartApply<>(func, 2).apply(4L),
+            CoreMatchers.equalTo(func.apply(2, 4L))
+        );
     }
 }
