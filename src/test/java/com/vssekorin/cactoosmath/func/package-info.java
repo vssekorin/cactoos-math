@@ -21,45 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.func;
-
-import org.cactoos.BiFunc;
-import org.cactoos.Func;
 
 /**
- * Partial function application.
+ * Tests for funcs.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <X> First input type
- * @param <Y> Second input type
- * @param <Z> Result type
  * @since 0.1
  */
-public final class PartApply<X, Y, Z> implements Func<Y, Z> {
-
-    /**
-     * Origin function.
-     */
-    private final BiFunc<X, Y, Z> func;
-
-    /**
-     * First argument.
-     */
-    private final X first;
-
-    /**
-     * Ctor.
-     * @param fnc Function of two arguments
-     * @param arg First argument
-     */
-    public PartApply(final BiFunc<X, Y, Z> fnc, final X arg) {
-        this.func = fnc;
-        this.first = arg;
-    }
-
-    @Override
-    public Z apply(final Y input) throws Exception {
-        return this.func.apply(this.first, input);
-    }
-}
+package com.vssekorin.cactoosmath.func;
