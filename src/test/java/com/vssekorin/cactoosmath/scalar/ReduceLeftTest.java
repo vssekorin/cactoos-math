@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link Exp}.
+ * Test case for {@link ReduceLeft}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
