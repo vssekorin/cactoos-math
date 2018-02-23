@@ -1,8 +1,32 @@
 <img src="http://cf.jare.io/?u=http%3A%2F%2Fwww.yegor256.com%2Fimages%2Fbooks%2Felegant-objects%2Fcactus.svg" height="100px" />
 
 [![Build Status](https://travis-ci.org/VsSekorin/cactoos-math.svg?branch=master)](https://travis-ci.org/VsSekorin/cactoos-math)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/VsSekorin/cactoos-math/blob/master/LICENSE)
 
 Extension of [Cactoos](https://github.com/yegor256/cactoos). Added classes for mathematical objects.
+
+Java version required: 1.8+.
+
+## Funcs
+
+Please use a Func<X, Func<Y, Z>> instead of BiFunc<X, Y, Z>.
+
+```java
+BiFunc<Integer, Long, Number> bifunc = (fst, snd) -> fst + snd;
+Func<Integer, Func<Long, Number>> funcfunc = new BiFuncFunc<>(bifunc);
+```
+
+[Partial application](https://en.wikipedia.org/wiki/Partial_application):
+
+```java
+BiFunc<Integer, Long, Long> bifunc = (fst, snd) -> fst + snd;
+Func<Long, Long> func = new PartApply<>(func, 2);
+```
+This is equivalent to:
+```java
+BiFunc<Integer, Long, Long> bifunc = (fst, snd) -> fst + snd;
+Func<Long, Long> func = new BiFuncFunc<>(bifunc).apply(2)
+```
 
 ## Seq
 
@@ -34,6 +58,27 @@ Fibonacci number:
 new BiSeq<>(0, 1, (fst, snd) -> fst + snd)
 ```
 
+## Scalars
+
+Random number in [2; 4]:
+```java
+new Random(() -> 2, () -> 4);
+```
+
+Factorial of 5:
+
+```java
+new ReduceLeft<>(
+    new Limited<>(
+        5,
+        new Seq<>(1, a -> a + 1)
+    ),
+    fst -> snd -> fst * snd
+);
+```
+
+Other scalars: `Abs`, `Cbrt`, `Cos`, `Exp`, `Round`, `Sin`, `Sqrt`, `Tan`.
+
 ## How to contribute?
 
 Just fork the repo and send us a pull request.
@@ -43,6 +88,10 @@ Make sure your branch builds without any warnings/issues:
 ```
 mvn clean install -Pqulice
 ```
+
+## Contributors
+
+  - [@VsSekorin](https://github.com/VsSekorin) as Vseslav Sekorin ([Blog](http://vssekorin.com))
 
 ## MIT License
 
