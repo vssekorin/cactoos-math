@@ -30,7 +30,7 @@ import org.cactoos.Scalar;
 import org.cactoos.iterable.Reversed;
 
 /**
- * Applies a function of two arguments to all elements, going left to right.
+ * Applies a function of two arguments to all elements, going right to left.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
