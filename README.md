@@ -9,7 +9,7 @@ Java version required: 1.8+.
 
 ## Funcs
 
-Please use a Func<X, Func<Y, Z>> instead of BiFunc<X, Y, Z>.
+Please use a `Func<X, Func<Y, Z>>` instead of `BiFunc<X, Y, Z>`. [A little bit about that](https://github.com/google/guava/wiki/IdeaGraveyard#functionspredicates-for-n--2-inputs)
 
 ```java
 BiFunc<Integer, Long, Number> bifunc = (fst, snd) -> fst + snd;
@@ -77,7 +77,7 @@ new ReduceLeft<>(
 );
 ```
 
-Other scalars: `Abs`, `Cbrt`, `Cos`, `Exp`, `Round`, `Sin`, `Sqrt`, `Tan`.
+Other scalars: `Abs`, `Cbrt`, `Cos`, `Exp`, `Round`, `Sin`, `Sqrt`, `Tan`, `ReduceRight`.
 
 ## How to contribute?
 
