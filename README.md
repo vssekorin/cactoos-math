@@ -9,7 +9,7 @@ Java version required: 1.8+.
 
 ## Funcs
 
-Please use a `Func<X, Func<Y, Z>>` instead of `BiFunc<X, Y, Z>`. [A little bit about that](https://github.com/google/guava/wiki/IdeaGraveyard#functionspredicates-for-n--2-inputs)
+Please use a `Func<X, Func<Y, Z>>` instead of `BiFunc<X, Y, Z>` ([a little bit about that](https://github.com/google/guava/wiki/IdeaGraveyard#functionspredicates-for-n--2-inputs)).
 
 ```java
 BiFunc<Integer, Long, Number> bifunc = (fst, snd) -> fst + snd;
@@ -56,6 +56,50 @@ new And(
 Fibonacci number:
 ```java
 new BiSeq<>(0, 1, (fst, snd) -> fst + snd)
+```
+
+## Matrix
+
+The sum of two matrices:
+
+```java
+new MatrixAdd<>(
+    new MatrixOf<>(
+        new Integer[][]{
+            {1, 2},
+            {3, 4},
+        }
+    ),
+    new MatrixOf<>(
+        new Long[][]{
+            {9L, 8L},
+            {7L, 6L},
+        }
+    ),
+    (inm, lnm) -> inm + lnm
+)
+```
+
+The product of two matrices:
+
+```java
+new MatrixMult<>(
+    new MatrixOf<>(
+        new Integer[][]{
+            {1, 2},
+            {3, 4},
+        }
+    ),
+    new MatrixOf<>(
+        new Long[][]{
+            {9L, 8L},
+            {7L, 6L},
+        }
+    ),
+    a -> b -> a * b,
+    a -> b -> a + b,
+    0L
+)
 ```
 
 ## Scalars
