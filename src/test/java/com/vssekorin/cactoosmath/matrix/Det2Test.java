@@ -36,7 +36,7 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public class Det2Test {
+public final class Det2Test {
 
     @Test
     public void value() {
