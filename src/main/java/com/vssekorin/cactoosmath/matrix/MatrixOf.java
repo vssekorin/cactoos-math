@@ -23,6 +23,9 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
+import org.cactoos.Func;
+import org.cactoos.func.UncheckedFunc;
+
 /**
  * Array as matrix.
  *
@@ -40,5 +43,41 @@ public final class MatrixOf<T> extends MatrixEnvelope<T> {
     @SuppressWarnings("PMD.UseVarargs")
     public MatrixOf(final T[][] array) {
         super(() -> () -> array);
+    }
+
+    /**
+     * Ctor.
+     * @param func Filling function
+     * @param rows Number of rows
+     * @param cols Number of columns
+     */
+    public MatrixOf(final Func<Number, Func<Number, T>> func,
+        final Number rows, final Number cols) {
+        super(() -> () -> (T[][]) fillArray(func, rows, cols));
+    }
+
+    /**
+     * Fill array.
+     *
+     * @param func Filling function
+     * @param rows Number of rows
+     * @param cols Number of columns
+     * @param <R> Type of matrix
+     * @return Array
+     */
+    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+    private static <R> R[][] fillArray(
+        final Func<Number, Func<Number, R>> func, final Number rows,
+        final Number cols) {
+        final R[][] result =
+            (R[][]) new Object[rows.intValue()][cols.intValue()];
+        for (int row = 0; row < rows.intValue(); ++row) {
+            for (int col = 0; col < cols.intValue(); ++col) {
+                result[row][col] = new UncheckedFunc<>(
+                    new UncheckedFunc<>(func).apply(row)
+                ).apply(col);
+            }
+        }
+        return result;
     }
 }
