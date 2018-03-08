@@ -38,6 +38,8 @@ public final class Minor<T> extends MatrixEnvelope<T> {
     /**
      * Ctor.
      * @param src The source
+     * @param row Row number
+     * @param col Column number
      */
     public Minor(final Matrix<T> src, final Number row, final Number col) {
         super(() -> new RemoveRow<>(new RemoveColumn<>(src, col), row));
