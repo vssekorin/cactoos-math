@@ -64,7 +64,7 @@ public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param add Addition
      */
     public MatrixAdd(final Matrix<X> first, final Matrix<Y> second,
-                     final Func<X, Func<Y, Z>> add) {
+        final Func<X, Func<Y, Z>> add) {
         super(() -> {
             final int rows = new RowNumber<>(first).value();
             final int cols = new ColumnNumber<>(first).value();
