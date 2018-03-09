@@ -23,7 +23,12 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
+import com.vssekorin.cactoosmath.Matrix;
+import java.util.Iterator;
 import org.cactoos.Func;
+import org.cactoos.Scalar;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Array as matrix.
@@ -36,18 +41,104 @@ import org.cactoos.Func;
 @SuppressWarnings(
     {
         "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
+        "PMD.OnlyOneConstructorShouldDoInitialization"
     }
 )
 public final class MatrixOf<T> extends MatrixEnvelope<T> {
 
     /**
      * Ctor.
-     * @param array Array
+     * @param src An array of some elements
+     * @param rows Number of rows
+     * @param cols Number of columns
      */
-    @SuppressWarnings("PMD.UseVarargs")
-    public MatrixOf(final T[][] array) {
-        super(() -> () -> array);
+    public MatrixOf(final Scalar<Number> rows, final Scalar<Number> cols,
+        final T... src) {
+        this(rows, cols, new IterableOf<>(src));
+    }
+
+    /**
+     * Ctor.
+     * @param src An array of some elements
+     * @param rows Number of rows
+     * @param cols Number of columns
+     */
+    public MatrixOf(final Number rows, final Number cols, final T... src) {
+        this(rows, cols, new IterableOf<>(src));
+    }
+
+    /**
+     * Ctor.
+     * @param src An {@link Iterator}
+     * @param rows Number of rows
+     * @param cols Number of columns
+     */
+    public MatrixOf(final Scalar<Number> rows, final Scalar<Number> cols,
+        final Iterator<T> src) {
+        this(rows, cols, new IterableOf<>(src));
+    }
+
+    /**
+     * Ctor.
+     * @param src An {@link Iterator}
+     * @param rows Number of rows
+     * @param cols Number of columns
+     */
+    public MatrixOf(final Number rows, final Number cols,
+        final Iterator<T> src) {
+        this(rows, cols, new IterableOf<>(src));
+    }
+
+    /**
+     * Ctor.
+     * @param rows Number of rows
+     * @param cols Number of columns
+     * @param src An {@link Iterable}
+     */
+    public MatrixOf(final Scalar<Number> rows, final Scalar<Number> cols,
+        final Iterable<T> src) {
+        this(
+            new UncheckedScalar<>(rows).value(),
+            new UncheckedScalar<>(cols).value(),
+            src
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param rows Number of rows
+     * @param cols Number of columns
+     * @param src An {@link Iterable}
+     */
+    public MatrixOf(final Number rows, final Number cols,
+        final Iterable<T> src) {
+        this(() -> {
+            final T[][] result =
+                (T[][]) new Object[rows.intValue()][cols.intValue()];
+            final Iterator<T> iterator = src.iterator();
+            for (int row = 0; row < rows.intValue(); ++row) {
+                for (int col = 0; col < cols.intValue(); ++col) {
+                    result[row][col] = iterator.next();
+                }
+            }
+            return result;
+        });
+    }
+
+    /**
+     * Ctor.
+     * @param func Filling function
+     * @param rows Number of rows
+     * @param cols Number of columns
+     */
+    public MatrixOf(final Func<Number, Func<Number, T>> func,
+        final Scalar<Number> rows, final Scalar<Number> cols) {
+        this(
+            func,
+            new UncheckedScalar<>(rows).value(),
+            new UncheckedScalar<>(cols).value()
+        );
     }
 
     /**
@@ -58,7 +149,7 @@ public final class MatrixOf<T> extends MatrixEnvelope<T> {
      */
     public MatrixOf(final Func<Number, Func<Number, T>> func,
         final Number rows, final Number cols) {
-        super(() -> () -> {
+        this(() -> {
             final T[][] result =
                 (T[][]) new Object[rows.intValue()][cols.intValue()];
             for (int row = 0; row < rows.intValue(); ++row) {
@@ -68,5 +159,22 @@ public final class MatrixOf<T> extends MatrixEnvelope<T> {
             }
             return result;
         });
+    }
+
+    /**
+     * Ctor.
+     * @param src Array
+     */
+    @SuppressWarnings("PMD.UseVarargs")
+    public MatrixOf(final T[][] src) {
+        this(() -> src);
+    }
+
+    /**
+     * Ctor.
+     * @param src Matrix
+     */
+    public MatrixOf(final Matrix<T> src) {
+        super(() -> src);
     }
 }

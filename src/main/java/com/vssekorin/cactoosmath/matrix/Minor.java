@@ -24,6 +24,8 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Minor.
@@ -34,6 +36,23 @@ import com.vssekorin.cactoosmath.Matrix;
  * @since 0.1
  */
 public final class Minor<T> extends MatrixEnvelope<T> {
+
+    /**
+     * Ctor.
+     * @param src The source
+     * @param row Row number
+     * @param col Column number
+     */
+    public Minor(final Matrix<T> src, final Scalar<Number> row,
+        final Scalar<Number> col) {
+        super(() -> new RemoveRow<>(
+            new RemoveColumn<>(
+                src,
+                new UncheckedScalar<>(col).value()
+            ),
+            new UncheckedScalar<>(row).value()
+        ));
+    }
 
     /**
      * Ctor.
