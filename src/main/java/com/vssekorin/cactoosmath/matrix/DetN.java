@@ -76,7 +76,7 @@ public final class DetN<T> implements Scalar<T> {
     @Override
     @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public T value() throws Exception {
-        final int cols = new ColumnNumber<>(this.matrix).value();
+        final int cols = new NmbColumns<>(this.matrix).value();
         final T[][] array = this.matrix.asArray();
         T result = this.mult
             .apply(array[0][0])

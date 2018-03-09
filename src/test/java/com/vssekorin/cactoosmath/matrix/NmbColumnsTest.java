@@ -23,12 +23,12 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import org.hamcrest.CoreMatchers;
+import org.cactoos.ScalarHasValue;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link MatrixMult}.
+ * Test case for {@link NmbColumns}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -36,34 +36,20 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class MatrixMultTest {
+public final class NmbColumnsTest {
 
     @Test
-    public void asArray() throws Exception {
+    public void value() {
         MatcherAssert.assertThat(
-            new MatrixMult<>(
+            new NmbColumns<>(
                 new MatrixOf<>(
                     new Integer[][]{
-                        {1, 2},
-                        {3, 4},
+                        {1, 2, 3},
+                        {4, 5, 6},
                     }
-                ),
-                new MatrixOf<>(
-                    new Long[][]{
-                        {9L, 8L},
-                        {7L, 6L},
-                    }
-                ),
-                a -> b -> a * b,
-                a -> b -> a + b,
-                0L
-            ).asArray(),
-            CoreMatchers.equalTo(
-                new Long[][]{
-                    {23L, 20L},
-                    {55L, 48L},
-                }
-            )
+                )
+            ),
+            new ScalarHasValue<>(3)
         );
     }
 }

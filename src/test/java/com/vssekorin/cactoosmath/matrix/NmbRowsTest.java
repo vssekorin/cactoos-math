@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link RowNumber}.
+ * Test case for {@link NmbRows}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -36,16 +36,18 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class RowNumberTest {
+public final class NmbRowsTest {
 
     @Test
     public void value() {
         MatcherAssert.assertThat(
-            new RowNumber<>(
-                new Integer[][]{
-                    {1, 2, 3},
-                    {4, 5, 6},
-                }
+            new NmbRows<>(
+                new MatrixOf<>(
+                    new Integer[][]{
+                        {1, 2, 3},
+                        {4, 5, 6},
+                    }
+                )
             ),
             new ScalarHasValue<>(2)
         );

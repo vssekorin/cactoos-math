@@ -23,12 +23,12 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import org.cactoos.ScalarHasValue;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link ColumnNumber}.
+ * Test case for {@link MatrixSum}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -36,18 +36,32 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class ColumnNumberTest {
+public final class MatrixSumTest {
 
     @Test
-    public void value() {
+    public void asArray() throws Exception {
         MatcherAssert.assertThat(
-            new ColumnNumber<>(
-                new Integer[][]{
-                    {1, 2, 3},
-                    {4, 5, 6},
+            new MatrixSum<>(
+                new MatrixOf<>(
+                    new Integer[][]{
+                        {1, 2},
+                        {3, 4},
+                    }
+                ),
+                new MatrixOf<>(
+                    new Long[][]{
+                        {9L, 8L},
+                        {7L, 6L},
+                    }
+                ),
+                (inm, lnm) -> inm + lnm
+            ).asArray(),
+            CoreMatchers.equalTo(
+                new Long[][]{
+                    {10L, 10L},
+                    {10L, 10L},
                 }
-            ),
-            new ScalarHasValue<>(3)
+            )
         );
     }
 }

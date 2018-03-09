@@ -44,7 +44,7 @@ import org.cactoos.Func;
         "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
     }
 )
-public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
+public final class MatrixSum<X, Y, Z> extends MatrixEnvelope<Z> {
 
     /**
      * Ctor.
@@ -52,7 +52,7 @@ public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param second Second matrix
      * @param add Addition
      */
-    public MatrixAdd(final Matrix<X> first, final Matrix<Y> second,
+    public MatrixSum(final Matrix<X> first, final Matrix<Y> second,
         final BiFunc<X, Y, Z> add) {
         this(first, second, new BiFuncFunc<>(add));
     }
@@ -63,11 +63,11 @@ public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param second Second matrix
      * @param add Addition
      */
-    public MatrixAdd(final Matrix<X> first, final Matrix<Y> second,
+    public MatrixSum(final Matrix<X> first, final Matrix<Y> second,
         final Func<X, Func<Y, Z>> add) {
-        super(() -> {
-            final int rows = new RowNumber<>(first).value();
-            final int cols = new ColumnNumber<>(first).value();
+        super(() -> () -> {
+            final int rows = new NmbRows<>(first).value();
+            final int cols = new NmbColumns<>(first).value();
             final X[][] left = first.asArray();
             final Y[][] right = second.asArray();
             final Z[][] result = (Z[][]) new Object[rows][cols];
@@ -78,7 +78,7 @@ public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
                         .apply(right[row][col]);
                 }
             }
-            return new MatrixOf<>(result);
+            return result;
         });
     }
 }
