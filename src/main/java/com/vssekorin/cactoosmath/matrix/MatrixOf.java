@@ -41,7 +41,8 @@ import org.cactoos.scalar.UncheckedScalar;
 @SuppressWarnings(
     {
         "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
+        "PMD.OnlyOneConstructorShouldDoInitialization"
     }
 )
 public final class MatrixOf<T> extends MatrixEnvelope<T> {
