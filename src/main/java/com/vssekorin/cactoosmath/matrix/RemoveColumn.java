@@ -53,8 +53,8 @@ public final class RemoveColumn<T> extends MatrixEnvelope<T> {
      */
     public RemoveColumn(final Matrix<T> src, final Number nmb) {
         super(() -> () -> {
-            final int rows = new RowNumber<>(src).value();
-            final int cols = new ColumnNumber<>(src).value();
+            final int rows = new NmbRows<>(src).value();
+            final int cols = new NmbColumns<>(src).value();
             final T[][] array = src.asArray();
             final T[][] result = (T[][]) new Object[rows][cols - 1];
             for (int row = 0; row < rows; ++row) {

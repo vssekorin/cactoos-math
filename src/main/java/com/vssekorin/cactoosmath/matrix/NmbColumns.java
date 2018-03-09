@@ -23,43 +23,34 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import com.vssekorin.cactoosmath.Matrix;
+import org.cactoos.Scalar;
 
 /**
- * Test case for {@link BoolMxMult}.
+ * Number of column.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
+ * @param <T> Type of matrix
  * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
  */
-public final class BoolMxMultTest {
+public final class NmbColumns<T> implements Scalar<Integer> {
 
-    @Test
-    public void asArray() throws Exception {
-        MatcherAssert.assertThat(
-            new BoolMxMult(
-                new MatrixOf<>(
-                    new Boolean[][]{
-                        {false, false},
-                        {true, true},
-                    }
-                ),
-                new MatrixOf<>(
-                    new Boolean[][]{
-                        {true, false},
-                        {true, false},
-                    }
-                )
-            ).asArray(),
-            CoreMatchers.equalTo(
-                new Boolean[][]{
-                    {false, false},
-                    {true, false},
-                }
-            )
-        );
+    /**
+     * Matrix.
+     */
+    private final Matrix<T> matrix;
+
+    /**
+     * Ctor.
+     * @param src Matrix.
+     */
+    public NmbColumns(final Matrix<T> src) {
+        this.matrix = src;
+    }
+
+    @Override
+    public Integer value() throws Exception {
+        return this.matrix.asArray()[0].length;
     }
 }

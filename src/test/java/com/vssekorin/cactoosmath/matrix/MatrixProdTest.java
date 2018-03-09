@@ -23,43 +23,47 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import com.vssekorin.cactoosmath.Matrix;
-import org.cactoos.Scalar;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Number of row.
+ * Test case for {@link MatrixProd}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of matrix
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class RowNumber<T> implements Scalar<Integer> {
+public final class MatrixProdTest {
 
-    /**
-     * Matrix.
-     */
-    private final T[][] matrix;
-
-    /**
-     * Ctor.
-     * @param mtrx Matrix.
-     */
-    public RowNumber(final Matrix<T> mtrx) {
-        this(new UncheckedMatrix<>(mtrx).asArray());
-    }
-
-    /**
-     * Ctor.
-     * @param mtrx Matrix.
-     */
-    @SuppressWarnings("PMD.UseVarargs")
-    public RowNumber(final T[][] mtrx) {
-        this.matrix = mtrx.clone();
-    }
-
-    @Override
-    public Integer value() throws Exception {
-        return this.matrix.length;
+    @Test
+    public void asArray() throws Exception {
+        MatcherAssert.assertThat(
+            new MatrixProd<>(
+                new MatrixOf<>(
+                    new Integer[][]{
+                        {1, 2},
+                        {3, 4},
+                    }
+                ),
+                new MatrixOf<>(
+                    new Long[][]{
+                        {9L, 8L},
+                        {7L, 6L},
+                    }
+                ),
+                a -> b -> a * b,
+                a -> b -> a + b,
+                0L
+            ).asArray(),
+            CoreMatchers.equalTo(
+                new Long[][]{
+                    {23L, 20L},
+                    {55L, 48L},
+                }
+            )
+        );
     }
 }

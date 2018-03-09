@@ -75,7 +75,7 @@ public final class Det<T> implements Scalar<T> {
 
     @Override
     public T value() throws Exception {
-        final int cols = new ColumnNumber<>(this.matrix).value();
+        final int cols = new NmbColumns<>(this.matrix).value();
         final T result;
         if (cols == 2) {
             result = new Det2<>(this.matrix, this.mult, this.sub).value();

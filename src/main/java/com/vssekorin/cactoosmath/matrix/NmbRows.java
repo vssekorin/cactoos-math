@@ -23,45 +23,34 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import com.vssekorin.cactoosmath.Matrix;
+import org.cactoos.Scalar;
 
 /**
- * Test case for {@link MatrixAdd}.
+ * Number of row.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
+ * @param <T> Type of matrix
  * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class MatrixAddTest {
+public final class NmbRows<T> implements Scalar<Integer> {
 
-    @Test
-    public void asArray() throws Exception {
-        MatcherAssert.assertThat(
-            new MatrixAdd<>(
-                new MatrixOf<>(
-                    new Integer[][]{
-                        {1, 2},
-                        {3, 4},
-                    }
-                ),
-                new MatrixOf<>(
-                    new Long[][]{
-                        {9L, 8L},
-                        {7L, 6L},
-                    }
-                ),
-                (inm, lnm) -> inm + lnm
-            ).asArray(),
-            CoreMatchers.equalTo(
-                new Long[][]{
-                    {10L, 10L},
-                    {10L, 10L},
-                }
-            )
-        );
+    /**
+     * Matrix.
+     */
+    private final Matrix<T> matrix;
+
+    /**
+     * Ctor.
+     * @param src Matrix.
+     */
+    public NmbRows(final Matrix<T> src) {
+        this.matrix = src;
+    }
+
+    @Override
+    public Integer value() throws Exception {
+        return this.matrix.asArray().length;
     }
 }

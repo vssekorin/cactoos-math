@@ -44,7 +44,7 @@ import org.cactoos.Func;
         "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
     }
 )
-public final class MatrixMult<X, Y, Z> extends MatrixEnvelope<Z> {
+public final class MatrixProd<X, Y, Z> extends MatrixEnvelope<Z> {
 
     /**
      * Ctor.
@@ -55,7 +55,7 @@ public final class MatrixMult<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param zero Identity element for addition
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public MatrixMult(final Matrix<X> first, final Matrix<Y> second,
+    public MatrixProd(final Matrix<X> first, final Matrix<Y> second,
         final Func<X, Func<Y, Z>> mult, final BiFunc<Z, Z, Z> add,
         final Z zero) {
         this(first, second, mult, new BiFuncFunc<>(add), zero);
@@ -70,7 +70,7 @@ public final class MatrixMult<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param zero Identity element for addition
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public MatrixMult(final Matrix<X> first, final Matrix<Y> second,
+    public MatrixProd(final Matrix<X> first, final Matrix<Y> second,
         final BiFunc<X, Y, Z> mult, final Func<Z, Func<Z, Z>> add,
         final Z zero) {
         this(first, second, new BiFuncFunc<>(mult), add, zero);
@@ -85,10 +85,11 @@ public final class MatrixMult<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param zero Identity element for addition
      * @checkstyle ParameterNumberCheck (10 lines)
      */
-    public MatrixMult(final Matrix<X> first, final Matrix<Y> second,
+    public MatrixProd(final Matrix<X> first, final Matrix<Y> second,
         final BiFunc<X, Y, Z> mult, final BiFunc<Z, Z, Z> add,
         final Z zero) {
-        this(first, second,
+        this(
+            first, second,
             new BiFuncFunc<>(mult), new BiFuncFunc<>(add),
             zero
         );
@@ -103,13 +104,13 @@ public final class MatrixMult<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param zero Identity element for addition
      * @checkstyle ParameterNumberCheck (30 lines)
      */
-    public MatrixMult(final Matrix<X> first, final Matrix<Y> second,
+    public MatrixProd(final Matrix<X> first, final Matrix<Y> second,
         final Func<X, Func<Y, Z>> mult, final Func<Z, Func<Z, Z>> add,
         final Z zero) {
-        super(() -> {
-            final int rows = new RowNumber<>(first).value();
-            final int inners = new ColumnNumber<>(first).value();
-            final int cols = new ColumnNumber<>(second).value();
+        super(() -> () -> {
+            final int rows = new NmbRows<>(first).value();
+            final int inners = new NmbColumns<>(first).value();
+            final int cols = new NmbColumns<>(second).value();
             final X[][] left = first.asArray();
             final Y[][] right = second.asArray();
             final Z[][] result = (Z[][]) new Object[rows][cols];
@@ -127,7 +128,7 @@ public final class MatrixMult<X, Y, Z> extends MatrixEnvelope<Z> {
                     }
                 }
             }
-            return new MatrixOf<>(result);
+            return result;
         });
     }
 }
