@@ -53,7 +53,7 @@ public final class DetN<T> implements Scalar<T> {
     private final Func<T, Func<T, T>> add;
 
     /**
-     * Negative.
+     * Subtractive.
      */
     private final Func<T, Func<T, T>> sub;
 
