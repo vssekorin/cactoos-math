@@ -24,7 +24,9 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
+import com.vssekorin.cactoosmath.func.BiFuncFunc;
 import org.cactoos.BiFunc;
+import org.cactoos.Func;
 
 /**
  * Matrix addition.
@@ -52,6 +54,17 @@ public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
      */
     public MatrixAdd(final Matrix<X> first, final Matrix<Y> second,
         final BiFunc<X, Y, Z> add) {
+        this(first, second, new BiFuncFunc<>(add));
+    }
+
+    /**
+     * Ctor.
+     * @param first First matrix
+     * @param second Second matrix
+     * @param add Addition
+     */
+    public MatrixAdd(final Matrix<X> first, final Matrix<Y> second,
+                     final Func<X, Func<Y, Z>> add) {
         super(() -> {
             final int rows = new RowNumber<>(first).value();
             final int cols = new ColumnNumber<>(first).value();
@@ -60,10 +73,9 @@ public final class MatrixAdd<X, Y, Z> extends MatrixEnvelope<Z> {
             final Z[][] result = (Z[][]) new Object[rows][cols];
             for (int row = 0; row < rows; ++row) {
                 for (int col = 0; col < cols; ++col) {
-                    result[row][col] = add.apply(
-                        left[row][col],
-                        right[row][col]
-                    );
+                    result[row][col] = add
+                        .apply(left[row][col])
+                        .apply(right[row][col]);
                 }
             }
             return new MatrixOf<>(result);

@@ -24,6 +24,8 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Matrix without one column.
@@ -34,6 +36,15 @@ import com.vssekorin.cactoosmath.Matrix;
  * @since 0.1
  */
 public final class RemoveColumn<T> extends MatrixEnvelope<T> {
+
+    /**
+     * Ctor.
+     * @param src The source
+     * @param nmb Column number
+     */
+    public RemoveColumn(final Matrix<T> src, final Scalar<Number> nmb) {
+        this(src, new UncheckedScalar<>(nmb).value());
+    }
 
     /**
      * Ctor.
