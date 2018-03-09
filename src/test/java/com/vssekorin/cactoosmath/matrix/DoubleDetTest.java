@@ -23,38 +23,34 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import com.vssekorin.cactoosmath.Matrix;
-import org.cactoos.Scalar;
+import org.cactoos.ScalarHasValue;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * The determinant of float matrix.
+ * Test case for {@link DoubleDet}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class FloatDet implements Scalar<Float> {
+public final class DoubleDetTest {
 
-    /**
-     * Origin matrix.
-     */
-    private final Matrix<Float> origin;
-
-    /**
-     * Ctor.
-     * @param src Integer matrix
-     */
-    public FloatDet(final Matrix<Float> src) {
-        this.origin = src;
-    }
-
-    @Override
-    public Float value() throws Exception {
-        return new Det<>(
-            this.origin,
-            fst -> snd -> fst * snd,
-            fst -> snd -> fst + snd,
-            fst -> snd -> fst - snd
-        ).value();
+    @Test
+    public void value() {
+        MatcherAssert.assertThat(
+            new DoubleDet(
+                new MatrixOf<>(
+                    new Double[][]{
+                        {5d, 7d, 1d},
+                        {-4d, 1d, 0d},
+                        {2d, 0d, 3d},
+                    }
+                )
+            ),
+            new ScalarHasValue<>(97d)
+        );
     }
 }

@@ -27,29 +27,29 @@ import com.vssekorin.cactoosmath.Matrix;
 import org.cactoos.Scalar;
 
 /**
- * The determinant of float matrix.
+ * The determinant of double matrix.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-public final class FloatDet implements Scalar<Float> {
+public final class DoubleDet implements Scalar<Double> {
 
     /**
      * Origin matrix.
      */
-    private final Matrix<Float> origin;
+    private final Matrix<Double> origin;
 
     /**
      * Ctor.
      * @param src Integer matrix
      */
-    public FloatDet(final Matrix<Float> src) {
+    public DoubleDet(final Matrix<Double> src) {
         this.origin = src;
     }
 
     @Override
-    public Float value() throws Exception {
+    public Double value() throws Exception {
         return new Det<>(
             this.origin,
             fst -> snd -> fst * snd,
