@@ -24,38 +24,49 @@
 package com.vssekorin.cactoosmath.graph;
 
 import com.vssekorin.cactoosmath.Graph;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.cactoos.Scalar;
-import org.cactoos.scalar.UncheckedScalar;
+import org.cactoos.Func;
 
 /**
- * Graph envelope.
+ * Graph of.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of graph
+ * @param <T> Type of matrix
  * @since 0.1
- * @checkstyle AbstractClassNameCheck (500 lines)
  */
-@SuppressWarnings("PMD.AbstractNaming")
-public abstract class GraphEnvelope<T> implements Graph<T> {
-
-    /**
-     * The graph.
-     */
-    private final UncheckedScalar<Graph<T>> origin;
+public class GraphOf<T> extends GraphEnvelope<T> {
 
     /**
      * Ctor.
-     * @param graph The source
+     * @param vertices List
+     * @param create Func
      */
-    public GraphEnvelope(final Scalar<Graph<T>> graph) {
-        this.origin = new UncheckedScalar<>(graph);
+    public GraphOf(final List<T> vertices, final Func<T, List<T>> create) {
+        this(() -> {
+            final Map<T, List<T>> result = new HashMap<>();
+            for (final T node : vertices) {
+                result.put(node, create.apply(node));
+            }
+            return result;
+        });
     }
 
-    @Override
-    public final Map<T, List<T>> asMap() throws Exception {
-        return this.origin.value().asMap();
+    /**
+     * Ctor.
+     * @param src Map
+     */
+    public GraphOf(final Map<T, List<T>> src) {
+        this(() -> src);
+    }
+
+    /**
+     * Ctor.
+     * @param src Graph
+     */
+    public GraphOf(final Graph<T> src) {
+        super(() -> src);
     }
 }

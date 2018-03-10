@@ -31,7 +31,7 @@ import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Array as matrix.
+ * Matrix of.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
