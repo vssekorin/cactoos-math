@@ -35,11 +35,18 @@ import org.cactoos.Func;
  * @param <Y> Type of target item
  * @since 0.1
  */
+@SuppressWarnings(
+    {
+        "PMD.CallSuperInConstructor",
+        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+    }
+)
 public final class Mapped<X, Y> extends MatrixEnvelope<Y> {
 
     /**
      * Ctor.
-     * @param origin The source
+     * @param origin Matrix
+     * @param map Func
      */
     public Mapped(final Matrix<X> origin, final Func<X, Y> map) {
         super(() -> () -> {
@@ -47,8 +54,8 @@ public final class Mapped<X, Y> extends MatrixEnvelope<Y> {
             final int cols = new NmbColumns<>(origin).value();
             final Y[][] result = (Y[][]) new Object[rows][cols];
             final X[][] array = origin.asArray();
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < cols; col++) {
+            for (int row = 0; row < rows; ++row) {
+                for (int col = 0; col < cols; ++col) {
                     result[row][col] = map.apply(array[row][col]);
                 }
             }
