@@ -24,49 +24,47 @@
 package com.vssekorin.cactoosmath.graph;
 
 import com.vssekorin.cactoosmath.Graph;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.cactoos.Func;
+import org.cactoos.Scalar;
+import org.cactoos.collection.Filtered;
+import org.cactoos.list.ListOf;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Graph of.
+ * Graph without node.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Type of matrix
  * @since 0.1
  */
-public final class GraphOf<T> extends GraphEnvelope<T> {
+public final class RemoveNode<T> extends GraphEnvelope<T> {
 
     /**
      * Ctor.
-     * @param vertices List
-     * @param create Func
+     * @param graph Origin graph
+     * @param node Scalar of node
      */
-    public GraphOf(final List<T> vertices, final Func<T, List<T>> create) {
-        this(() -> {
-            final Map<T, List<T>> result = new HashMap<>();
-            for (final T node : vertices) {
-                result.put(node, create.apply(node));
-            }
+    public RemoveNode(final Graph<T> graph, final Scalar<T> node) {
+        this(graph, new UncheckedScalar<>(node).value());
+    }
+
+    /**
+     * Ctor.
+     * @param graph Origin graph
+     * @param node Node
+     */
+    public RemoveNode(final Graph<T> graph, final T node) {
+        super(() -> () -> {
+            final Map<T, List<T>> result = graph.asMap();
+            result.remove(node);
+            result.replaceAll(
+                (elem, list) -> new ListOf<>(
+                    new Filtered<>(t -> !t.equals(node), list)
+                )
+            );
             return result;
         });
-    }
-
-    /**
-     * Ctor.
-     * @param src Map
-     */
-    public GraphOf(final Map<T, List<T>> src) {
-        this(() -> src);
-    }
-
-    /**
-     * Ctor.
-     * @param src Graph
-     */
-    public GraphOf(final Graph<T> src) {
-        super(() -> src);
     }
 }
