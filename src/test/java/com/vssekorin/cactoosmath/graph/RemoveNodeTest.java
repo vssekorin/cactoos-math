@@ -23,50 +23,33 @@
  */
 package com.vssekorin.cactoosmath.graph;
 
-import com.vssekorin.cactoosmath.Graph;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.cactoos.Func;
+import org.cactoos.list.ListOf;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Graph of.
+ * Test case for {@link RemoveNode}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of matrix
  * @since 0.1
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class GraphOf<T> extends GraphEnvelope<T> {
+public final class RemoveNodeTest {
 
-    /**
-     * Ctor.
-     * @param vertices List
-     * @param create Func
-     */
-    public GraphOf(final List<T> vertices, final Func<T, List<T>> create) {
-        this(() -> {
-            final Map<T, List<T>> result = new HashMap<>();
-            for (final T node : vertices) {
-                result.put(node, create.apply(node));
-            }
-            return result;
-        });
-    }
-
-    /**
-     * Ctor.
-     * @param src Map
-     */
-    public GraphOf(final Map<T, List<T>> src) {
-        this(() -> src);
-    }
-
-    /**
-     * Ctor.
-     * @param src Graph
-     */
-    public GraphOf(final Graph<T> src) {
-        super(() -> src);
+    @Test
+    public void asMap() throws Exception {
+        MatcherAssert.assertThat(
+            new RemoveNode<>(
+                new GraphOf<>(
+                    new ListOf<>(1, 2, 3),
+                    node -> new ListOf<>(1, 2, 3)
+                ),
+                2
+            ).asMap().get(1),
+            CoreMatchers.hasItems(1, 3)
+        );
     }
 }
