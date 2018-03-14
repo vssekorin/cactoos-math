@@ -1,9 +1,16 @@
-<img src="http://cf.jare.io/?u=http%3A%2F%2Fwww.yegor256.com%2Fimages%2Fbooks%2Felegant-objects%2Fcactus.svg" height="100px" />
-
 [![Build Status](https://travis-ci.org/VsSekorin/cactoos-math.svg?branch=master)](https://travis-ci.org/VsSekorin/cactoos-math)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/VsSekorin/cactoos-math/blob/master/LICENSE)
 
-Extension of [Cactoos](https://github.com/yegor256/cactoos). Added classes for mathematical objects.
+Extension of [Cactoos](https://github.com/yegor256/cactoos) ([my blog post about this](http://vssekorin.com/post/cactoos/)). Added classes for mathematical objects.
+
+**Motivation**:
+
+- Math classes is overkill for Cactoos, but it can be useful and interesting.
+- It is generally accepted that functional programming is suitable for mathematics, not OOP.
+- Practice in OOP.
+
+**Principles**.
+These are the [design principles](http://www.elegantobjects.org#principles) behind Cactoos.
 
 Java version required: 1.8+.
 
@@ -19,12 +26,10 @@ Func<Integer, Func<Long, Number>> funcfunc = new BiFuncFunc<>(bifunc);
 [Partial application](https://en.wikipedia.org/wiki/Partial_application):
 
 ```java
-BiFunc<Integer, Long, Long> bifunc = (fst, snd) -> fst + snd;
-Func<Long, Long> func = new PartApply<>(func, 2);
+Func<Long, Long> func = new PartApply<>(bifunc, 2);
 ```
 This is equivalent to:
 ```java
-BiFunc<Integer, Long, Long> bifunc = (fst, snd) -> fst + snd;
 Func<Long, Long> func = new BiFuncFunc<>(bifunc).apply(2)
 ```
 
@@ -38,18 +43,6 @@ Stream of random double greater than or equal to 6 and less than 16:
 ```java
 new Seq(new Random(6, 16), a -> new Random(6, 16))
 ```
-```java
-new And(
-    (Proc<Double>) System.out::println,
-    new Mapped<Scalar<Double>, Double>(
-        Scalar::value,
-        new Limited<>(
-            20,
-            new Seq<>(new Random(0, 10), a -> new Random(0, 10))
-        )
-    )
-).value();
-```
 
 ## BiSeq
 
@@ -59,6 +52,15 @@ new BiSeq<>(0, 1, (fst, snd) -> fst + snd)
 ```
 
 ## Matrix
+
+Identity matrix:
+
+```java
+new MatrixOf<>(
+    row -> col -> row.equals(col) ? 1 : 0,
+    6, 6
+)
+```
 
 The sum of two matrices:
 
@@ -102,6 +104,33 @@ new MatrixMult<>(
 )
 ```
 
+Determinant:
+
+```java
+new IntDet<>(
+    new MatrixOf<>(
+        new Integer[][]{
+            {1, 2},
+            {3, 4},
+        }
+    )
+)
+```
+
+## Graphs
+
+Remove node:
+
+```java
+new RemoveNode<>(
+    new GraphOf<>(
+        new ListOf<>(1, 2, 3),
+        node -> new ListOf<>(1, 2, 3)
+    ),
+    2
+)
+```
+
 ## Scalars
 
 Random number in [2; 4]:
@@ -121,7 +150,7 @@ new ReduceLeft<>(
 );
 ```
 
-Other scalars: `Abs`, `Cbrt`, `Cos`, `Exp`, `Round`, `Sin`, `Sqrt`, `Tan`, `ReduceRight`.
+Other scalars: `Abs`, `Cbrt`, `Constant`, `Cos`, `Exp`, `FoldLeft`, `FoldRight`, `ReduceLeft`, `ReduceRight`, `Round`, `Sin`, `Sqrt`, `Tan`.
 
 ## How to contribute?
 
