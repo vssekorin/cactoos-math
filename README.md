@@ -6,7 +6,7 @@ Extension of [Cactoos](https://github.com/yegor256/cactoos) ([my blog post about
 **Motivation**:
 
 - Math classes is overkill for Cactoos, but it can be useful and interesting.
-- It is generally accepted that functional programming is suitable for mathematics, not OOP.
+- It is generally accepted that FP, rather than OOP, is more suitable for math.
 - Practice in OOP.
 
 **Principles**.
@@ -51,6 +51,11 @@ Fibonacci number:
 new BiSeq<>(0, 1, (fst, snd) -> fst + snd)
 ```
 
+Lucas number:
+```java
+new BiSeq<>(2, 1, fst -> snd -> snd + fst)
+```
+
 ## Matrix
 
 Identity matrix:
@@ -64,28 +69,10 @@ new MatrixOf<>(
 
 The sum of two matrices:
 
-```java
-new MatrixAdd<>(
-    new MatrixOf<>(
-        new Integer[][]{
-            {1, 2},
-            {3, 4},
-        }
-    ),
-    new MatrixOf<>(
-        new Long[][]{
-            {9L, 8L},
-            {7L, 6L},
-        }
-    ),
-    (inm, lnm) -> inm + lnm
-)
-```
-
 The product of two matrices:
 
 ```java
-new MatrixMult<>(
+new MatrixProd<>(
     new MatrixOf<>(
         new Integer[][]{
             {1, 2},
