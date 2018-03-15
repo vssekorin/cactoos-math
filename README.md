@@ -58,7 +58,7 @@ new BiSeq<>(2, 1, fst -> snd -> snd + fst)
 
 ## Matrix
 
-Identity matrix:
+Identity matrix 6x6:
 
 ```java
 new MatrixOf<>(
@@ -66,8 +66,6 @@ new MatrixOf<>(
     6, 6
 )
 ```
-
-The sum of two matrices:
 
 The product of two matrices:
 
