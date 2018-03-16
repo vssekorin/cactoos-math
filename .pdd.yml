@@ -1,0 +1,7 @@
+--source=.
+--verbose
+--exclude target/**/*
+--exclude src/main/resources/images/**/*
+--rule min-words:10
+--rule min-estimate:15
+--rule max-estimate:30
