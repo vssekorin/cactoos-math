@@ -63,6 +63,7 @@ public final class MatrixSum<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param second Second matrix
      * @param add Addition
      */
+    @SuppressWarnings("unchecked")
     public MatrixSum(final Matrix<X> first, final Matrix<Y> second,
         final Func<X, Func<Y, Z>> add) {
         super(() -> () -> {

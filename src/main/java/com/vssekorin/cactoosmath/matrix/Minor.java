@@ -45,13 +45,11 @@ public final class Minor<T> extends MatrixEnvelope<T> {
      */
     public Minor(final Matrix<T> src, final Scalar<Number> row,
         final Scalar<Number> col) {
-        super(() -> new RemoveRow<>(
-            new RemoveColumn<>(
-                src,
-                new UncheckedScalar<>(col).value()
-            ),
-            new UncheckedScalar<>(row).value()
-        ));
+        this(
+            src,
+            new UncheckedScalar<>(row).value(),
+            new UncheckedScalar<>(col).value()
+        );
     }
 
     /**

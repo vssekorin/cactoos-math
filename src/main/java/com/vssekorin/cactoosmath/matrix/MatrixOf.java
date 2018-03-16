@@ -42,7 +42,8 @@ import org.cactoos.scalar.UncheckedScalar;
     {
         "PMD.CallSuperInConstructor",
         "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
-        "PMD.OnlyOneConstructorShouldDoInitialization"
+        "PMD.OnlyOneConstructorShouldDoInitialization",
+        "unchecked"
     }
 )
 public final class MatrixOf<T> extends MatrixEnvelope<T> {

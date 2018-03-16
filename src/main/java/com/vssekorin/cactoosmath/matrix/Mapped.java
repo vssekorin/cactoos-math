@@ -48,6 +48,7 @@ public final class Mapped<X, Y> extends MatrixEnvelope<Y> {
      * @param origin Matrix
      * @param map Func
      */
+    @SuppressWarnings("unchecked")
     public Mapped(final Matrix<X> origin, final Func<X, Y> map) {
         super(() -> () -> {
             final int rows = new NmbRows<>(origin).value();

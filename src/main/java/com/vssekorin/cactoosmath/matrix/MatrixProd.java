@@ -104,6 +104,7 @@ public final class MatrixProd<X, Y, Z> extends MatrixEnvelope<Z> {
      * @param zero Identity element for addition
      * @checkstyle ParameterNumberCheck (30 lines)
      */
+    @SuppressWarnings("unchecked")
     public MatrixProd(final Matrix<X> first, final Matrix<Y> second,
         final Func<X, Func<Y, Z>> mult, final Func<Z, Func<Z, Z>> add,
         final Z zero) {

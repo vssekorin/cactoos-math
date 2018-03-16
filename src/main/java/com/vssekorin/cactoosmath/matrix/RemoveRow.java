@@ -51,6 +51,7 @@ public final class RemoveRow<T> extends MatrixEnvelope<T> {
      * @param src The source
      * @param nmb Row number
      */
+    @SuppressWarnings("unchecked")
     public RemoveRow(final Matrix<T> src, final Number nmb) {
         super(() -> () -> {
             final int rows = new NmbRows<>(src).value();
