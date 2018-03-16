@@ -1,0 +1,13 @@
+docker:
+  image: yegor256/java8
+install: |-
+  sudo gem install pdd
+  java -version
+merge:
+  script: |-
+    mvn help:system clean install -Pqulice
+    mvn clean --quiet
+    pdd --source=$(pwd) --verbose --file=/dev/null
+  commanders: []
+architect:
+  - VsSekorin
