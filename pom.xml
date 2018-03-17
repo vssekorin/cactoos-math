@@ -17,6 +17,11 @@
     <system>GitHub</system>
     <url>https://github.com/VsSekorin/cactoos-math/issues</url>
   </issueManagement>
+  <scm>
+    <connection>scm:git:git@github.com:vssekorin/cactoos-math.git</connection>
+    <developerConnection>scm:git:git@github.com:vssekorin/cactoos-math.git</developerConnection>
+    <url>https://github.com/vssekorin/cactoos-math</url>
+  </scm>
 
   <dependencies>
     <dependency>
