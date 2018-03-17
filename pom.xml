@@ -13,15 +13,42 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <url>https://github.com/VsSekorin/cactoos-math</url>
+  <name>cactoos-math</name>
+  <description>Math extension of Cactoos.</description>
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/VsSekorin/cactoos-math/issues</url>
   </issueManagement>
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/VsSekorin/cactoos-math/blob/master/LICENSE</url>
+      <distribution>site</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>1</id>
+      <name>Vseslav Sekorin</name>
+      <email>vssekorin@gmail.com</email>
+      <organization>vssekorin.com</organization>
+      <organizationUrl>http://www.vssekorin.com</organizationUrl>
+      <roles>
+        <role>Architect</role>
+        <role>Developer</role>
+      </roles>
+    </developer>
+  </developers>
   <scm>
     <connection>scm:git:git@github.com:vssekorin/cactoos-math.git</connection>
     <developerConnection>scm:git:git@github.com:vssekorin/cactoos-math.git</developerConnection>
     <url>https://github.com/vssekorin/cactoos-math</url>
   </scm>
+  <ciManagement>
+    <system>rultor</system>
+    <url>http://www.rultor.com/s/cactoos-math</url>
+  </ciManagement>
 
   <dependencies>
     <dependency>
