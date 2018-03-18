@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/VsSekorin/cactoos-math.svg?branch=master)](https://travis-ci.org/VsSekorin/cactoos-math)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/VsSekorin/cactoos-math/blob/master/LICENSE)
 
-Extension of [Cactoos](https://github.com/yegor256/cactoos) ([my blog post about this](http://vssekorin.com/post/cactoos/)). Added classes for mathematical objects.
+Math extension of [Cactoos](https://github.com/yegor256/cactoos) ([my blog post about this](http://vssekorin.com/post/cactoos/)).
 
 **Motivation**:
 
