@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.graph;
+package com.vssekorin.cactoosmath.graph.directed;
 
-import com.vssekorin.cactoosmath.Graph;
+import com.vssekorin.cactoosmath.graph.DirectedGraph;
 import java.util.List;
 import java.util.Map;
 import org.cactoos.Scalar;
@@ -39,18 +39,18 @@ import org.cactoos.scalar.UncheckedScalar;
  * @checkstyle AbstractClassNameCheck (500 lines)
  */
 @SuppressWarnings("PMD.AbstractNaming")
-public abstract class GraphEnvelope<T> implements Graph<T> {
+public abstract class DirectedGraphEnvelope<T> implements DirectedGraph<T> {
 
     /**
      * The graph.
      */
-    private final UncheckedScalar<Graph<T>> origin;
+    private final UncheckedScalar<DirectedGraph<T>> origin;
 
     /**
      * Ctor.
      * @param graph The source
      */
-    public GraphEnvelope(final Scalar<Graph<T>> graph) {
+    public DirectedGraphEnvelope(final Scalar<DirectedGraph<T>> graph) {
         this.origin = new UncheckedScalar<>(graph);
     }
 

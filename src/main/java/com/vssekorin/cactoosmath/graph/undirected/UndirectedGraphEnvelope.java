@@ -21,35 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.graph;
+package com.vssekorin.cactoosmath.graph.undirected;
 
-import org.cactoos.list.ListOf;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import com.vssekorin.cactoosmath.graph.UndirectedGraph;
+import java.util.List;
+import java.util.Map;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Test case for {@link RemoveNode}.
+ * Graph envelope.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
+ * @param <T> Type of graph
  * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
+ * @checkstyle AbstractClassNameCheck (500 lines)
  */
-public final class RemoveNodeTest {
+@SuppressWarnings("PMD.AbstractNaming")
+public abstract class UndirectedGraphEnvelope<T> implements UndirectedGraph<T> {
 
-    @Test
-    public void asMap() throws Exception {
-        MatcherAssert.assertThat(
-            new RemoveNode<>(
-                new GraphOf<>(
-                    new ListOf<>(1, 2, 3),
-                    node -> new ListOf<>(1, 2, 3)
-                ),
-                2
-            ).asMap().get(1),
-            CoreMatchers.hasItems(1, 3)
-        );
+    /**
+     * The graph.
+     */
+    private final UncheckedScalar<UndirectedGraph<T>> origin;
+
+    /**
+     * Ctor.
+     * @param graph The source
+     */
+    public UndirectedGraphEnvelope(final Scalar<UndirectedGraph<T>> graph) {
+        this.origin = new UncheckedScalar<>(graph);
+    }
+
+    @Override
+    public final Map<T, List<T>> asMap() throws Exception {
+        return this.origin.value().asMap();
     }
 }
