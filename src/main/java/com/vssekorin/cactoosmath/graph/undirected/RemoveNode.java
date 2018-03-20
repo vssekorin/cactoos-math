@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.graph;
+package com.vssekorin.cactoosmath.graph.undirected;
 
-import com.vssekorin.cactoosmath.Graph;
+import com.vssekorin.cactoosmath.graph.UndirectedGraph;
 import java.util.List;
 import java.util.Map;
 import org.cactoos.Scalar;
@@ -39,14 +39,14 @@ import org.cactoos.scalar.UncheckedScalar;
  * @param <T> Type of matrix
  * @since 0.1
  */
-public final class RemoveNode<T> extends GraphEnvelope<T> {
+public final class RemoveNode<T> extends UndirectedGraphEnvelope<T> {
 
     /**
      * Ctor.
      * @param graph Origin graph
      * @param node Scalar of node
      */
-    public RemoveNode(final Graph<T> graph, final Scalar<T> node) {
+    public RemoveNode(final UndirectedGraph<T> graph, final Scalar<T> node) {
         this(graph, new UncheckedScalar<>(node).value());
     }
 
@@ -55,7 +55,7 @@ public final class RemoveNode<T> extends GraphEnvelope<T> {
      * @param graph Origin graph
      * @param node Node
      */
-    public RemoveNode(final Graph<T> graph, final T node) {
+    public RemoveNode(final UndirectedGraph<T> graph, final T node) {
         super(() -> () -> {
             final Map<T, List<T>> result = graph.asMap();
             result.remove(node);
