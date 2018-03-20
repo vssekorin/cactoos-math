@@ -32,7 +32,7 @@ import org.cactoos.list.ListOf;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Graph without node.
+ * Undirected graph without node.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$

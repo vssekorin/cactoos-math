@@ -30,12 +30,12 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Graph envelope.
+ * Undirected graph envelope.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Type of graph
- * @since 0.1
+ * @since 0.2
  * @checkstyle AbstractClassNameCheck (500 lines)
  */
 @SuppressWarnings("PMD.AbstractNaming")
