@@ -24,8 +24,8 @@
 package com.vssekorin.cactoosmath.graph.directed;
 
 import com.vssekorin.cactoosmath.graph.DirectedGraph;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.UncheckedScalar;
 
@@ -55,7 +55,7 @@ public abstract class DirectedGraphEnvelope<T> implements DirectedGraph<T> {
     }
 
     @Override
-    public final Map<T, List<T>> asMap() throws Exception {
+    public final Map<T, Set<T>> asMap() throws Exception {
         return this.origin.value().asMap();
     }
 }

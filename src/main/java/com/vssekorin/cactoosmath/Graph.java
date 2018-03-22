@@ -23,8 +23,8 @@
  */
 package com.vssekorin.cactoosmath;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Graph.
@@ -42,5 +42,5 @@ public interface Graph<T> {
      * @return Map
      * @throws Exception If fails
      */
-    Map<T, List<T>> asMap() throws Exception;
+    Map<T, Set<T>> asMap() throws Exception;
 }

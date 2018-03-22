@@ -24,11 +24,10 @@
 package com.vssekorin.cactoosmath.graph.undirected;
 
 import com.vssekorin.cactoosmath.graph.UndirectedGraph;
-import java.util.List;
+import com.vssekorin.cactoosmath.set.Filtered;
 import java.util.Map;
+import java.util.Set;
 import org.cactoos.Scalar;
-import org.cactoos.collection.Filtered;
-import org.cactoos.list.ListOf;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
@@ -57,12 +56,10 @@ public final class RemoveNode<T> extends UndirectedGraphEnvelope<T> {
      */
     public RemoveNode(final UndirectedGraph<T> graph, final T node) {
         super(() -> () -> {
-            final Map<T, List<T>> result = graph.asMap();
+            final Map<T, Set<T>> result = graph.asMap();
             result.remove(node);
             result.replaceAll(
-                (elem, list) -> new ListOf<>(
-                    new Filtered<>(t -> !t.equals(node), list)
-                )
+                (elem, set) -> new Filtered<>(set, item -> !item.equals(node))
             );
             return result;
         });

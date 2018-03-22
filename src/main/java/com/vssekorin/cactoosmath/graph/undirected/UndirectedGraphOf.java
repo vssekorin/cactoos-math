@@ -24,8 +24,8 @@
 package com.vssekorin.cactoosmath.graph.undirected;
 
 import com.vssekorin.cactoosmath.graph.UndirectedGraph;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Undirected graph of.
@@ -41,7 +41,7 @@ public final class UndirectedGraphOf<T> extends UndirectedGraphEnvelope<T> {
      * Ctor.
      * @param src Map
      */
-    public UndirectedGraphOf(final Map<T, List<T>> src) {
+    public UndirectedGraphOf(final Map<T, Set<T>> src) {
         this(() -> src);
     }
 
