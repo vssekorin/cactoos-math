@@ -46,7 +46,8 @@ public final class RemoveEdge<T> extends UndirectedGraphEnvelope<T> {
      * @param src Undirected graph
      * @param edge Edge
      */
-    public RemoveEdge(final UndirectedGraph<T> src, final Map.Entry<T, T> edge) {
+    public RemoveEdge(final UndirectedGraph<T> src,
+        final Map.Entry<T, T> edge) {
         this(src, edge.getKey(), edge.getValue());
     }
 
