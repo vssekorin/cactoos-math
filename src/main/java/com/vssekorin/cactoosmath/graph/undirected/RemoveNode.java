@@ -25,6 +25,7 @@ package com.vssekorin.cactoosmath.graph.undirected;
 
 import com.vssekorin.cactoosmath.graph.UndirectedGraph;
 import com.vssekorin.cactoosmath.set.Filtered;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.cactoos.Scalar;
@@ -56,7 +57,7 @@ public final class RemoveNode<T> extends UndirectedGraphEnvelope<T> {
      */
     public RemoveNode(final UndirectedGraph<T> graph, final T node) {
         super(() -> () -> {
-            final Map<T, Set<T>> result = graph.asMap();
+            final Map<T, Set<T>> result = new HashMap<>(graph.asMap());
             result.remove(node);
             result.replaceAll(
                 (elem, set) -> new Filtered<>(set, item -> !item.equals(node))

@@ -21,9 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.graph.directed;
+package com.vssekorin.cactoosmath.graph.undirected;
 
 import com.vssekorin.cactoosmath.graph.DirectedGraph;
+import com.vssekorin.cactoosmath.graph.directed.DirectedGraphEnvelope;
 import com.vssekorin.cactoosmath.set.Filtered;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,36 +33,58 @@ import org.cactoos.Scalar;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Directed graph without node.
+ * Undirected graph without edge.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Type of matrix
  * @since 0.1
  */
-public final class RemoveNode<T> extends DirectedGraphEnvelope<T> {
+public final class RemoveEdge<T> extends DirectedGraphEnvelope<T> {
 
     /**
      * Ctor.
-     * @param graph Origin graph
-     * @param node Scalar of node
+     * @param src Undirected graph
+     * @param edge Edge
      */
-    public RemoveNode(final DirectedGraph<T> graph, final Scalar<T> node) {
-        this(graph, new UncheckedScalar<>(node).value());
+    public RemoveEdge(final DirectedGraph<T> src, final Map.Entry<T, T> edge) {
+        this(src, edge.getKey(), edge.getValue());
     }
 
     /**
      * Ctor.
-     * @param graph Origin graph
-     * @param node Node
+     * @param src Undirected graph
+     * @param fst Edge node
+     * @param snd Edge node
      */
-    public RemoveNode(final DirectedGraph<T> graph, final T node) {
+    public RemoveEdge(final DirectedGraph<T> src, final Scalar<T> fst,
+        final Scalar<T> snd) {
+        this(
+            src,
+            new UncheckedScalar<>(fst).value(),
+            new UncheckedScalar<>(snd).value()
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param src Undirected graph
+     * @param fst Edge node
+     * @param snd Edge node
+     */
+    public RemoveEdge(final DirectedGraph<T> src, final T fst, final T snd) {
         super(() -> () -> {
-            final Map<T, Set<T>> result = new HashMap<>(graph.asMap());
-            result.remove(node);
-            result.replaceAll(
-                (elem, set) -> new Filtered<>(set, item -> !item.equals(node))
-            );
+            final Map<T, Set<T>> result = new HashMap<>(src.asMap());
+            if (result.containsKey(fst) && result.containsKey(snd)) {
+                result.put(
+                    fst,
+                    new Filtered<>(result.get(fst), item -> !item.equals(snd))
+                );
+                result.put(
+                    snd,
+                    new Filtered<>(result.get(snd), item -> !item.equals(fst))
+                );
+            }
             return result;
         });
     }
