@@ -23,8 +23,7 @@
  */
 package com.vssekorin.cactoosmath.graph.undirected;
 
-import com.vssekorin.cactoosmath.graph.DirectedGraph;
-import com.vssekorin.cactoosmath.graph.directed.DirectedGraphEnvelope;
+import com.vssekorin.cactoosmath.graph.UndirectedGraph;
 import com.vssekorin.cactoosmath.set.Filtered;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,14 +39,14 @@ import org.cactoos.scalar.UncheckedScalar;
  * @param <T> Type of matrix
  * @since 0.1
  */
-public final class RemoveEdge<T> extends DirectedGraphEnvelope<T> {
+public final class RemoveEdge<T> extends UndirectedGraphEnvelope<T> {
 
     /**
      * Ctor.
      * @param src Undirected graph
      * @param edge Edge
      */
-    public RemoveEdge(final DirectedGraph<T> src, final Map.Entry<T, T> edge) {
+    public RemoveEdge(final UndirectedGraph<T> src, final Map.Entry<T, T> edge) {
         this(src, edge.getKey(), edge.getValue());
     }
 
@@ -57,7 +56,7 @@ public final class RemoveEdge<T> extends DirectedGraphEnvelope<T> {
      * @param fst Edge node
      * @param snd Edge node
      */
-    public RemoveEdge(final DirectedGraph<T> src, final Scalar<T> fst,
+    public RemoveEdge(final UndirectedGraph<T> src, final Scalar<T> fst,
         final Scalar<T> snd) {
         this(
             src,
@@ -72,7 +71,7 @@ public final class RemoveEdge<T> extends DirectedGraphEnvelope<T> {
      * @param fst Edge node
      * @param snd Edge node
      */
-    public RemoveEdge(final DirectedGraph<T> src, final T fst, final T snd) {
+    public RemoveEdge(final UndirectedGraph<T> src, final T fst, final T snd) {
         super(() -> () -> {
             final Map<T, Set<T>> result = new HashMap<>(src.asMap());
             if (result.containsKey(fst) && result.containsKey(snd)) {
