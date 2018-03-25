@@ -31,8 +31,8 @@ import com.vssekorin.cactoosmath.set.SetEnvelope;
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of matrix
- * @since 0.1
+ * @param <T> Elements type
+ * @since 0.2
  */
 public final class Children<T> extends SetEnvelope<T> {
 
