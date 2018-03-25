@@ -25,6 +25,8 @@ package com.vssekorin.cactoosmath.graph;
 
 import com.vssekorin.cactoosmath.Graph;
 import com.vssekorin.cactoosmath.set.SetEnvelope;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Children of vertex.
@@ -35,6 +37,15 @@ import com.vssekorin.cactoosmath.set.SetEnvelope;
  * @since 0.2
  */
 public final class Children<T> extends SetEnvelope<T> {
+
+    /**
+     * Ctor.
+     * @param graph Graph
+     * @param vertex Scalar
+     */
+    public Children(final Graph<T> graph, final Scalar<T> vertex) {
+        this(graph, new UncheckedScalar<>(vertex).value());
+    }
 
     /**
      * Ctor.
