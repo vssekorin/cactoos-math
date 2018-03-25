@@ -27,7 +27,7 @@ import com.vssekorin.cactoosmath.Matrix;
 import org.cactoos.Func;
 
 /**
- * Matrix with mapped row.
+ * Matrix with mapped column.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -40,21 +40,21 @@ import org.cactoos.Func;
         "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
     }
 )
-public final class MappedRow<T> extends MatrixEnvelope<T> {
+public final class MappedColumn<T> extends MatrixEnvelope<T> {
 
     /**
      * Ctor.
      * @param src Origin matrix
-     * @param number Number of row
+     * @param number Number of column
      * @param map Map function
      */
     @SuppressWarnings("unchecked")
-    public MappedRow(final Matrix<T> src, final int number,
+    public MappedColumn(final Matrix<T> src, final int number,
         final Func<T, T> map) {
         super(() -> () -> {
             final T[][] array = src.asArray();
-            for (int col = 0; col < new NmbColumns<>(src).value(); ++col) {
-                array[number][col] = map.apply(array[number][col]);
+            for (int row = 0; row < new NmbRows<>(src).value(); ++row) {
+                array[row][number] = map.apply(array[row][number]);
             }
             return array;
         });

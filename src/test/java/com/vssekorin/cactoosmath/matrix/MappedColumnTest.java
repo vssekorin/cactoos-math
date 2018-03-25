@@ -23,40 +23,42 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import com.vssekorin.cactoosmath.Matrix;
-import org.cactoos.Func;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Matrix with mapped row.
+ * Test case for {@link MappedColumn}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Elements type
  * @since 0.2
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-    }
-)
-public final class MappedRow<T> extends MatrixEnvelope<T> {
+public final class MappedColumnTest {
 
-    /**
-     * Ctor.
-     * @param src Origin matrix
-     * @param number Number of row
-     * @param map Map function
-     */
-    @SuppressWarnings("unchecked")
-    public MappedRow(final Matrix<T> src, final int number,
-        final Func<T, T> map) {
-        super(() -> () -> {
-            final T[][] array = src.asArray();
-            for (int col = 0; col < new NmbColumns<>(src).value(); ++col) {
-                array[number][col] = map.apply(array[number][col]);
-            }
-            return array;
-        });
+    @Test
+    public void asArray() throws Exception {
+        MatcherAssert.assertThat(
+            new MappedColumn<>(
+                new MatrixOf<>(
+                    new Integer[][]{
+                        {1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9},
+                    }
+                ),
+                1,
+                inm -> 0
+            ).asArray(),
+            CoreMatchers.equalTo(
+                new Integer[][]{
+                    {1, 0, 3},
+                    {4, 0, 6},
+                    {7, 0, 9},
+                }
+            )
+        );
     }
 }
