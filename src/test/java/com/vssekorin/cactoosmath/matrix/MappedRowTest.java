@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link Mapped}.
+ * Test case for {@link MappedRow}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
