@@ -21,48 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.graph.directed;
+package com.vssekorin.cactoosmath.graph;
 
-import com.vssekorin.cactoosmath.graph.DirectedGraph;
-import com.vssekorin.cactoosmath.set.Filtered;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import org.cactoos.Scalar;
-import org.cactoos.scalar.UncheckedScalar;
+import com.vssekorin.cactoosmath.Graph;
+import com.vssekorin.cactoosmath.set.SetEnvelope;
 
 /**
- * Directed graph without node.
+ * Graph vertices.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Elements type
- * @since 0.1
+ * @since 0.2
  */
-public final class RemoveNode<T> extends DirectedGraphEnvelope<T> {
+public final class Vertices<T> extends SetEnvelope<T> {
 
     /**
      * Ctor.
-     * @param graph Origin graph
-     * @param node Scalar of node
+     * @param graph Graph
      */
-    public RemoveNode(final DirectedGraph<T> graph, final Scalar<T> node) {
-        this(graph, new UncheckedScalar<>(node).value());
-    }
-
-    /**
-     * Ctor.
-     * @param graph Origin graph
-     * @param node Node
-     */
-    public RemoveNode(final DirectedGraph<T> graph, final T node) {
-        super(() -> () -> {
-            final Map<T, Set<T>> result = new HashMap<>(graph.asMap());
-            result.remove(node);
-            result.replaceAll(
-                (elem, set) -> new Filtered<>(set, item -> !item.equals(node))
-            );
-            return result;
-        });
+    public Vertices(final Graph<T> graph) {
+        super(() -> graph.asMap().keySet());
     }
 }

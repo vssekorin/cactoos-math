@@ -21,48 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.graph.directed;
+package com.vssekorin.cactoosmath.graph;
 
-import com.vssekorin.cactoosmath.graph.DirectedGraph;
-import com.vssekorin.cactoosmath.set.Filtered;
+import com.vssekorin.cactoosmath.set.SetOf;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.cactoos.Scalar;
-import org.cactoos.scalar.UncheckedScalar;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Directed graph without node.
+ * Test case for {@link Vertices}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Elements type
- * @since 0.1
+ * @since 0.2
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class RemoveNode<T> extends DirectedGraphEnvelope<T> {
+public final class VerticesTest {
 
-    /**
-     * Ctor.
-     * @param graph Origin graph
-     * @param node Scalar of node
-     */
-    public RemoveNode(final DirectedGraph<T> graph, final Scalar<T> node) {
-        this(graph, new UncheckedScalar<>(node).value());
-    }
-
-    /**
-     * Ctor.
-     * @param graph Origin graph
-     * @param node Node
-     */
-    public RemoveNode(final DirectedGraph<T> graph, final T node) {
-        super(() -> () -> {
-            final Map<T, Set<T>> result = new HashMap<>(graph.asMap());
-            result.remove(node);
-            result.replaceAll(
-                (elem, set) -> new Filtered<>(set, item -> !item.equals(node))
-            );
-            return result;
-        });
+    @Test
+    public void get() {
+        MatcherAssert.assertThat(
+            new Vertices<>(
+                () -> {
+                    final Map<Integer, Set<Integer>> result = new HashMap<>();
+                    result.put(1, new SetOf<>(1, 2));
+                    result.put(2, new SetOf<>(2));
+                    result.put(3, new SetOf<>(1, 2, 3));
+                    return result;
+                }
+            ),
+            CoreMatchers.hasItems(1, 2, 3)
+        );
     }
 }

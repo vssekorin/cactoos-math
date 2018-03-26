@@ -36,7 +36,7 @@ import org.cactoos.scalar.UncheckedScalar;
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of matrix
+ * @param <T> Elements type
  * @since 0.1
  */
 public final class RemoveEdge<T> extends UndirectedGraphEnvelope<T> {
