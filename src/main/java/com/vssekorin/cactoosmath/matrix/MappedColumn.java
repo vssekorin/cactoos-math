@@ -52,11 +52,22 @@ public final class MappedColumn<T> extends MatrixEnvelope<T> {
     public MappedColumn(final Matrix<T> src, final int number,
         final Func<T, T> map) {
         super(() -> () -> {
+            final int rows = new NmbRows<>(src).value();
+            final int cols = new NmbColumns<>(src).value();
+            final T[][] result = (T[][]) new Object[rows][cols];
             final T[][] array = src.asArray();
-            for (int row = 0; row < new NmbRows<>(src).value(); ++row) {
-                array[row][number] = map.apply(array[row][number]);
+            for (int col = 0; col < cols; ++col) {
+                if (col == number) {
+                    for (int row = 0; row < rows; ++row) {
+                        result[row][col] = map.apply(array[row][col]);
+                    }
+                } else {
+                    for (int row = 0; row < rows; ++row) {
+                        result[row][col] = array[row][col];
+                    }
+                }
             }
-            return array;
+            return result;
         });
     }
 }
