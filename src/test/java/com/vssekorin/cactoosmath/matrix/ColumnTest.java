@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link Row}.
+ * Test case for {@link Column}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -36,19 +36,19 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class RowTest {
+public final class ColumnTest {
 
     @Test
     public void get() {
         MatcherAssert.assertThat(
-            new Row<>(
+            new Column<>(
                 new MatrixOf<>(
                     3, 3,
                     1, 2, 3, 4, 5, 6, 7, 8, 9
                 ),
                 1
             ),
-            CoreMatchers.hasItems(4, 5, 6)
+            CoreMatchers.hasItems(2, 5, 8)
         );
     }
 }
