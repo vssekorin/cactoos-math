@@ -24,46 +24,54 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
+import java.util.ArrayList;
+import java.util.List;
 import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Row of matrix.
+ * Column of matrix.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Elements type
  * @since 0.2
  */
-public final class Row<T> extends IterableEnvelope<T> {
+public final class Column<T> extends IterableEnvelope<T> {
 
     /**
      * Ctor.
      * @param matrix Matrix
-     * @param row Number envelope
+     * @param col Number envelope
      */
-    public Row(final Matrix<T> matrix, final NumberEnvelope row) {
-        this(matrix, row.intValue());
+    public Column(final Matrix<T> matrix, final NumberEnvelope col) {
+        this(matrix, col.intValue());
     }
 
     /**
      * Ctor.
      * @param matrix Matrix
-     * @param row Scalar
+     * @param col Scalar
      */
-    public Row(final Matrix<T> matrix, final Scalar<Integer> row) {
-        this(matrix, new UncheckedScalar<>(row).value());
+    public Column(final Matrix<T> matrix, final Scalar<Integer> col) {
+        this(matrix, new UncheckedScalar<>(col).value());
     }
 
     /**
      * Ctor.
      * @param matrix Matrix
-     * @param row Integer
+     * @param col Integer
      */
-    public Row(final Matrix<T> matrix, final int row) {
-        super(() -> new IterableOf<>(matrix.asArray()[row]));
+    public Column(final Matrix<T> matrix, final int col) {
+        super(() -> {
+            final List<T> result =
+                new ArrayList<>(new NmbRows<>(matrix).value());
+            for (final T[] row : matrix.asArray()) {
+                result.add(row[col]);
+            }
+            return result;
+        });
     }
 }
