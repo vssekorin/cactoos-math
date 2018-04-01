@@ -42,7 +42,7 @@ public final class RowTest {
     public void get() {
         MatcherAssert.assertThat(
             new Row<>(
-                new MatrixOf<Integer>(
+                new MatrixOf<>(
                     3, 3,
                     1, 2, 3, 4, 5, 6, 7, 8, 9
                 ),

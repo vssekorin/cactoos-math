@@ -28,6 +28,7 @@ import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
  * Row of matrix.
@@ -45,7 +46,7 @@ public final class Row<T> extends IterableEnvelope<T> {
      * @param row Number envelope
      */
     public Row(final Matrix<T> matrix, final NumberEnvelope row) {
-        super(() -> new IterableOf<>(matrix.asArray()[row.intValue()]));
+        this(matrix, row.intValue());
     }
 
     /**
@@ -54,7 +55,7 @@ public final class Row<T> extends IterableEnvelope<T> {
      * @param row Scalar
      */
     public Row(final Matrix<T> matrix, final Scalar<Integer> row) {
-        super(() -> new IterableOf<>(matrix.asArray()[row.value()]));
+        this(matrix, new UncheckedScalar<>(row).value());
     }
 
     /**

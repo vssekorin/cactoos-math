@@ -23,49 +23,32 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import com.vssekorin.cactoosmath.Matrix;
-import org.cactoos.Func;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Matrix with mapped row.
+ * Test case for {@link Column}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Elements type
  * @since 0.2
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-    }
-)
-public final class MappedRow<T> extends MatrixEnvelope<T> {
+public final class ColumnTest {
 
-    /**
-     * Ctor.
-     * @param src Origin matrix
-     * @param number Number of row
-     * @param map Map function
-     */
-    @SuppressWarnings("unchecked")
-    public MappedRow(final Matrix<T> src, final int number,
-        final Func<T, T> map) {
-        super(() -> () -> {
-            final int rows = new NmbRows<>(src).value();
-            final int cols = new NmbColumns<>(src).value();
-            final T[][] result = (T[][]) new Object[rows][cols];
-            final T[][] array = src.asArray();
-            for (int row = 0; row < rows; ++row) {
-                if (row == number) {
-                    for (int col = 0; col < cols; ++col) {
-                        result[row][col] = map.apply(array[row][col]);
-                    }
-                } else {
-                    System.arraycopy(array[row], 0, result[row], 0, cols);
-                }
-            }
-            return result;
-        });
+    @Test
+    public void get() {
+        MatcherAssert.assertThat(
+            new Column<>(
+                new MatrixOf<>(
+                    3, 3,
+                    1, 2, 3, 4, 5, 6, 7, 8, 9
+                ),
+                1
+            ),
+            CoreMatchers.hasItems(2, 5, 8)
+        );
     }
 }

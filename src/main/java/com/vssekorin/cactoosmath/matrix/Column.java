@@ -24,46 +24,52 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
-import org.cactoos.Func;
+import java.util.ArrayList;
+import java.util.List;
+import org.cactoos.Scalar;
+import org.cactoos.iterable.IterableEnvelope;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Matrix with mapped row.
+ * Column of matrix.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @param <T> Elements type
  * @since 0.2
  */
-@SuppressWarnings(
-    {
-        "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-    }
-)
-public final class MappedRow<T> extends MatrixEnvelope<T> {
+public final class Column<T> extends IterableEnvelope<T> {
 
     /**
      * Ctor.
-     * @param src Origin matrix
-     * @param number Number of row
-     * @param map Map function
+     * @param matrix Matrix
+     * @param col Number envelope
      */
-    @SuppressWarnings("unchecked")
-    public MappedRow(final Matrix<T> src, final int number,
-        final Func<T, T> map) {
-        super(() -> () -> {
-            final int rows = new NmbRows<>(src).value();
-            final int cols = new NmbColumns<>(src).value();
-            final T[][] result = (T[][]) new Object[rows][cols];
-            final T[][] array = src.asArray();
-            for (int row = 0; row < rows; ++row) {
-                if (row == number) {
-                    for (int col = 0; col < cols; ++col) {
-                        result[row][col] = map.apply(array[row][col]);
-                    }
-                } else {
-                    System.arraycopy(array[row], 0, result[row], 0, cols);
-                }
+    public Column(final Matrix<T> matrix, final NumberEnvelope col) {
+        this(matrix, col.intValue());
+    }
+
+    /**
+     * Ctor.
+     * @param matrix Matrix
+     * @param col Scalar
+     */
+    public Column(final Matrix<T> matrix, final Scalar<Integer> col) {
+        this(matrix, new UncheckedScalar<>(col).value());
+    }
+
+    /**
+     * Ctor.
+     * @param matrix Matrix
+     * @param col Integer
+     */
+    public Column(final Matrix<T> matrix, final int col) {
+        super(() -> {
+            final List<T> result =
+                new ArrayList<>(new NmbRows<>(matrix).value());
+            for (final T[] row : matrix.asArray()) {
+                result.add(row[col]);
             }
             return result;
         });
