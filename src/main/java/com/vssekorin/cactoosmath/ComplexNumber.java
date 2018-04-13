@@ -38,7 +38,7 @@ public interface ComplexNumber {
      * @return Real part
      * @throws Exception If fails
      */
-    double re() throws Exception;
+    double real() throws Exception;
 
     /**
      * Imaginary part.
@@ -46,5 +46,5 @@ public interface ComplexNumber {
      * @return Imaginary part
      * @throws Exception If fails
      */
-    double im() throws Exception;
+    double imag() throws Exception;
 }
