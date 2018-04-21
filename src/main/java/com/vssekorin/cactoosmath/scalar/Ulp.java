@@ -36,7 +36,6 @@ import org.cactoos.scalar.UncheckedScalar;
  */
 public final class Ulp extends NumberEnvelope {
 
-
     /**
      * Serialization marker.
      */
