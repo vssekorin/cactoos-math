@@ -153,6 +153,7 @@ mvn clean install -Pqulice
 ## Contributors
 
   - [@VsSekorin](https://github.com/VsSekorin) as Vseslav Sekorin ([Blog](http://vssekorin.com))
+  - [@daryaego](https://github.com/daryaego) as Darya Egorova
 
 ## MIT License
 
