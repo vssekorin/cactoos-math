@@ -24,48 +24,47 @@
 package com.vssekorin.cactoosmath.scalar;
 
 import java.util.Map;
-import org.cactoos.Func;
-import org.cactoos.func.UncheckedFunc;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Pattern matching.
+ * Pattern matching as Scalar.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <X> Type of input.
- * @param <Y> Type of output.
+ * @param <T> Type of output.
  * @since 0.2
  */
-public final class Match<X, Y> implements Func<X, Y> {
+public final class ScalarMatch<T> implements Scalar<T> {
 
     /**
      * Map.
      */
-    private final Map<Func<X, Boolean>, Func<X, Y>> map;
+    private final Map<Scalar<Boolean>, Scalar<T>> map;
 
     /**
      * Default case.
      */
-    private final Func<X, Y> other;
+    private final Scalar<T> other;
 
     /**
      * Ctor.
      * @param src Map
      * @param dflt Default case
      */
-    public Match(final Map<Func<X, Boolean>, Func<X, Y>> src,
-        final Func<X, Y> dflt) {
+    public ScalarMatch(final Map<Scalar<Boolean>, Scalar<T>> src,
+        final Scalar<T> dflt) {
         this.map = src;
         this.other = dflt;
     }
 
     @Override
-    public Y apply(final X input) throws Exception {
+    public T value() throws Exception {
         return this.map.entrySet().stream()
-            .filter(item -> new UncheckedFunc<>(item.getKey()).apply(input))
+            .filter(entry -> new UncheckedScalar<>(entry.getKey()).value())
             .map(Map.Entry::getValue)
             .findFirst()
             .orElse(this.other)
-            .apply(input);
+            .value();
     }
 }

@@ -23,35 +23,49 @@
  */
 package com.vssekorin.cactoosmath.scalar;
 
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.util.Map;
+import org.cactoos.Func;
+import org.cactoos.func.UncheckedFunc;
 
 /**
- * Test case for {@link Match}.
+ * Pattern matching as Function.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
+ * @param <X> Type of input.
+ * @param <Y> Type of output.
  * @since 0.2
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class MatchTest {
+public final class FuncMatch<X, Y> implements Func<X, Y> {
 
-    @Test
-    @SuppressWarnings("unchecked")
-    public void apply() throws Exception {
-        MatcherAssert.assertThat(
-            new Match<Integer, Integer>(
-                new MapOf<>(
-                    new MapEntry<>(val -> val < 16, val -> val + 10),
-                    new MapEntry<>(val -> val > 16, val -> val - 10)
-                ),
-                val -> 0
-            ).apply(18),
-            Matchers.equalTo(8)
-        );
+    /**
+     * Map.
+     */
+    private final Map<Func<X, Boolean>, Func<X, Y>> map;
+
+    /**
+     * Default case.
+     */
+    private final Func<X, Y> other;
+
+    /**
+     * Ctor.
+     * @param src Map
+     * @param dflt Default case
+     */
+    public FuncMatch(final Map<Func<X, Boolean>, Func<X, Y>> src,
+        final Func<X, Y> dflt) {
+        this.map = src;
+        this.other = dflt;
+    }
+
+    @Override
+    public Y apply(final X input) throws Exception {
+        return this.map.entrySet().stream()
+            .filter(item -> new UncheckedFunc<>(item.getKey()).apply(input))
+            .map(Map.Entry::getValue)
+            .findFirst()
+            .orElse(this.other)
+            .apply(input);
     }
 }
