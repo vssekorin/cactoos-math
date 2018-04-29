@@ -23,35 +23,48 @@
  */
 package com.vssekorin.cactoosmath.scalar;
 
-import org.cactoos.map.MapEntry;
-import org.cactoos.map.MapOf;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.Test;
+import java.util.Map;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Test case for {@link Match}.
+ * Pattern matching as Scalar.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
+ * @param <T> Type of output.
  * @since 0.2
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class MatchTest {
+public final class ScalarMatch<T> implements Scalar<T> {
 
-    @Test
-    @SuppressWarnings("unchecked")
-    public void apply() throws Exception {
-        MatcherAssert.assertThat(
-            new Match<Integer, Integer>(
-                new MapOf<>(
-                    new MapEntry<>(val -> val < 16, val -> val + 10),
-                    new MapEntry<>(val -> val > 16, val -> val - 10)
-                ),
-                val -> 0
-            ).apply(18),
-            Matchers.equalTo(8)
-        );
+    /**
+     * Map.
+     */
+    private final Map<Scalar<Boolean>, Scalar<T>> map;
+
+    /**
+     * Default case.
+     */
+    private final Scalar<T> other;
+
+    /**
+     * Ctor.
+     * @param src Map
+     * @param dflt Default case
+     */
+    public ScalarMatch(final Map<Scalar<Boolean>, Scalar<T>> src,
+        final Scalar<T> dflt) {
+        this.map = src;
+        this.other = dflt;
+    }
+
+    @Override
+    public T value() throws Exception {
+        return this.map.entrySet().stream()
+            .filter(entry -> new UncheckedScalar<>(entry.getKey()).value())
+            .map(Map.Entry::getValue)
+            .findFirst()
+            .orElse(this.other)
+            .value();
     }
 }
