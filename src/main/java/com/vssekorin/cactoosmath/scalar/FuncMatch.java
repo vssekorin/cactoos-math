@@ -54,7 +54,7 @@ public final class FuncMatch<X, Y> implements Func<X, Y> {
      * @param dflt Default case
      */
     public FuncMatch(final Map<Func<X, Boolean>, Func<X, Y>> src,
-                     final Func<X, Y> dflt) {
+        final Func<X, Y> dflt) {
         this.map = src;
         this.other = dflt;
     }
