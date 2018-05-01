@@ -21,51 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.scalar;
-
-import java.util.Map;
-import org.cactoos.Func;
-import org.cactoos.func.UncheckedFunc;
+package com.vssekorin.cactoosmath;
 
 /**
- * Pattern matching as Function.
+ * Complex number.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <X> Type of input.
- * @param <Y> Type of output.
  * @since 0.2
  */
-public final class FuncMatch<X, Y> implements Func<X, Y> {
+public interface ComplexNumber {
 
     /**
-     * Map.
+     * Real part.
+     *
+     * @return Real part
+     * @throws Exception If fails
      */
-    private final Map<Func<X, Boolean>, Func<X, Y>> map;
+    double real() throws Exception;
 
     /**
-     * Default case.
+     * Imaginary part.
+     *
+     * @return Imaginary part
+     * @throws Exception If fails
      */
-    private final Func<X, Y> other;
-
-    /**
-     * Ctor.
-     * @param src Map
-     * @param dflt Default case
-     */
-    public FuncMatch(final Map<Func<X, Boolean>, Func<X, Y>> src,
-        final Func<X, Y> dflt) {
-        this.map = src;
-        this.other = dflt;
-    }
-
-    @Override
-    public Y apply(final X input) throws Exception {
-        return this.map.entrySet().stream()
-            .filter(item -> new UncheckedFunc<>(item.getKey()).apply(input))
-            .map(Map.Entry::getValue)
-            .findFirst()
-            .orElse(this.other)
-            .apply(input);
-    }
+    double imag() throws Exception;
 }
