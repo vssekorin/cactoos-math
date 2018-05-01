@@ -53,7 +53,7 @@ public final class ScalarMatchTest {
                 ),
                 () -> 0
             ),
-            Matchers.equalTo(8)
+            Matchers.equalTo(1)
         );
     }
 }
