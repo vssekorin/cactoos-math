@@ -25,8 +25,8 @@ package com.vssekorin.cactoosmath.scalar;
 
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
+import org.cactoos.matchers.ScalarHasValue;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Test;
 
 /**
@@ -53,7 +53,7 @@ public final class ScalarMatchTest {
                 ),
                 () -> 0
             ),
-            Matchers.equalTo(1)
+            new ScalarHasValue<>(1)
         );
     }
 }
