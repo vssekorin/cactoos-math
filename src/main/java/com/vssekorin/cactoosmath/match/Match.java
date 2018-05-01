@@ -40,17 +40,18 @@ import org.cactoos.list.ListOf;
  * @param <Z> Type of result
  * @since 0.2
  */
-public final class Match<X, Y, Z> implements Scalar<Z>, Func<X, Z>, BiFunc<X, Y, Z> {
+public final class Match<X, Y, Z>
+    implements Scalar<Z>, Func<X, Z>, BiFunc<X, Y, Z> {
 
     /**
      * Default case.
      */
-    public final BiFunc<X, Y, Z> other;
+    private final BiFunc<X, Y, Z> other;
 
     /**
      * List of cases.
      */
-    public final List<MatchCase<X, Y, Z>> cases;
+    private final List<MatchCase<X, Y, Z>> cases;
 
     /**
      * Ctor.
@@ -114,9 +115,9 @@ public final class Match<X, Y, Z> implements Scalar<Z>, Func<X, Z>, BiFunc<X, Y,
     @Override
     public Z apply(final X first, final Y second) throws Exception {
         BiFunc<X, Y, Z> result = this.other;
-        for (MatchCase<X, Y, Z> matchCase : this.cases) {
-            if (matchCase.test().apply(first, second)) {
-                result = matchCase.result();
+        for (final MatchCase<X, Y, Z> mcase : this.cases) {
+            if (mcase.test().apply(first, second)) {
+                result = mcase.result();
                 break;
             }
         }
@@ -125,11 +126,11 @@ public final class Match<X, Y, Z> implements Scalar<Z>, Func<X, Z>, BiFunc<X, Y,
 
     @Override
     public Z apply(final X input) throws Exception {
-        return apply(input, null);
+        return this.apply(input, null);
     }
 
     @Override
     public Z value() throws Exception {
-        return apply(null, null);
+        return this.apply(null, null);
     }
 }
