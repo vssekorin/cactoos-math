@@ -41,6 +41,7 @@ import org.junit.Test;
 public final class ScalarMatchTest {
 
     @Test
+    @SuppressWarnings("unchecked")
     public void apply() throws Exception {
         final int fst = 3;
         final int snd = 6;
