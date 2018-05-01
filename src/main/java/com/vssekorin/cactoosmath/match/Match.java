@@ -40,8 +40,8 @@ import org.cactoos.list.ListOf;
  * @param <Z> Type of result
  * @since 0.2
  */
-public final class Match<X, Y, Z>
-    implements Scalar<Z>, Func<X, Z>, BiFunc<X, Y, Z> {
+public final class Match<X, Y, Z> implements
+    Scalar<Z>, Func<X, Z>, BiFunc<X, Y, Z> {
 
     /**
      * Default case.
