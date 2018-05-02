@@ -116,8 +116,8 @@ public final class Match<X, Y, Z> implements
     public Z apply(final X first, final Y second) throws Exception {
         BiFunc<X, Y, Z> result = this.other;
         for (final MatchCase<X, Y, Z> mcase : this.cases) {
-            if (mcase.test().apply(first, second)) {
-                result = mcase.result();
+            if (mcase.check().apply(first, second)) {
+                result = mcase.value();
                 break;
             }
         }

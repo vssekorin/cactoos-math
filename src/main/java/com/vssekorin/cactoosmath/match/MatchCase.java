@@ -32,7 +32,7 @@ import org.cactoos.BiFunc;
  * @version $Id$
  * @param <X> Type of first input
  * @param <Y> Type of second input
- * @param <Z> Type of result
+ * @param <Z> Type of value
  * @since 0.2
  */
 public interface MatchCase<X, Y, Z> {
@@ -42,12 +42,12 @@ public interface MatchCase<X, Y, Z> {
      *
      * @return Test
      */
-    BiFunc<X, Y, Boolean> test();
+    BiFunc<X, Y, Boolean> check();
 
     /**
      * Result of case.
      *
      * @return Result
      */
-    BiFunc<X, Y, Z> result();
+    BiFunc<X, Y, Z> value();
 }
