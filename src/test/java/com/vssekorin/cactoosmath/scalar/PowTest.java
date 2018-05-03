@@ -23,67 +23,26 @@
  */
 package com.vssekorin.cactoosmath.scalar;
 
-import com.vssekorin.cactoosmath.Matrix;
-import com.vssekorin.cactoosmath.matrix.UncheckedMatrix;
-import org.cactoos.Scalar;
-import org.cactoos.list.ListOf;
-import org.cactoos.scalar.UncheckedScalar;
+import org.cactoos.matchers.ScalarHasValue;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Constant.
+ * Test case for {@link Pow}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of value
- * @since 0.1
+ * @since 0.2
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class Constant<T> implements Scalar<T> {
+public final class PowTest {
 
-    /**
-     * Value.
-     */
-    private final T val;
-
-    /**
-     * Ctor.
-     * @param src Matrix
-     * @param row Row number
-     * @param col Column number
-     */
-    public Constant(final Matrix<T> src, final Number row, final Number col) {
-        this(
-            new UncheckedMatrix<>(src)
-                .asArray()[row.intValue()][col.intValue()]
+    @Test
+    public void value() {
+        MatcherAssert.assertThat(
+            new Pow(2, 8),
+            new ScalarHasValue<>(256d)
         );
-    }
-
-    /**
-     * Ctor.
-     * @param src Iterable
-     * @param pos Index
-     */
-    public Constant(final Iterable<T> src, final Number pos) {
-        this(new ListOf<>(src).get(pos.intValue()));
-    }
-
-    /**
-     * Ctor.
-     * @param src Scalar
-     */
-    public Constant(final Scalar<T> src) {
-        this(new UncheckedScalar<>(src).value());
-    }
-
-    /**
-     * Ctor.
-     * @param src Value
-     */
-    public Constant(final T src) {
-        this.val = src;
-    }
-
-    @Override
-    public T value() throws Exception {
-        return this.val;
     }
 }
