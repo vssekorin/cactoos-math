@@ -23,26 +23,40 @@
  */
 package com.vssekorin.cactoosmath.scalar;
 
-import org.cactoos.matchers.ScalarHasValue;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Test case for {@link Exp}.
+ * Returns the signum function of the argument; zero if the argument is zero,
+ * 1.0 if the argument is greater than zero,
+ * -1.0 if the argument is less than zero.
  *
- * @author Vseslav Sekorin (vssekorin@gmail.com)
+ * @author Darya Egorova (dar3997@yandex.ru)
  * @version $Id$
- * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
+ * @since 0.2
  */
-public final class AbsTest {
+public final class Sign extends NumberEnvelope {
 
-    @Test
-    public void value() {
-        MatcherAssert.assertThat(
-            new Abs(() -> -6),
-            new ScalarHasValue<>(6.0)
-        );
+    /**
+     * Serialization marker.
+     */
+    private static final long serialVersionUID = -2465484771344689423L;
+
+    /**
+     * Ctor.
+     * @param scl Scalar
+     */
+    public Sign(final Scalar<Number> scl) {
+        this(new UncheckedScalar<>(scl).value());
     }
+
+    /**
+     * Ctor.
+     * @param nmb Number
+     */
+    public Sign(final Number nmb) {
+        super(() -> Math.signum(nmb.doubleValue()));
+    }
+
 }

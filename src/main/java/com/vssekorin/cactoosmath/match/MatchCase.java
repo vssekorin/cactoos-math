@@ -21,28 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.scalar;
+package com.vssekorin.cactoosmath.match;
 
-import org.cactoos.matchers.ScalarHasValue;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.cactoos.BiFunc;
 
 /**
- * Test case for {@link Exp}.
+ * Pattern matching case.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
+ * @param <X> Type of first input
+ * @param <Y> Type of second input
+ * @param <Z> Type of value
+ * @since 0.2
  */
-public final class AbsTest {
+public interface MatchCase<X, Y, Z> {
 
-    @Test
-    public void value() {
-        MatcherAssert.assertThat(
-            new Abs(() -> -6),
-            new ScalarHasValue<>(6.0)
-        );
-    }
+    /**
+     * Test of case.
+     *
+     * @return Test
+     */
+    BiFunc<X, Y, Boolean> check();
+
+    /**
+     * Result of case.
+     *
+     * @return Result
+     */
+    BiFunc<X, Y, Z> value();
 }

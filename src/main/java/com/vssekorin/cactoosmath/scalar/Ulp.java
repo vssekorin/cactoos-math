@@ -23,26 +23,38 @@
  */
 package com.vssekorin.cactoosmath.scalar;
 
-import org.cactoos.matchers.ScalarHasValue;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Test case for {@link Exp}.
+ * Returns the size of an ulp of the argument.
  *
- * @author Vseslav Sekorin (vssekorin@gmail.com)
+ * @author Darya Egorova (dar3997@yandex.ru)
  * @version $Id$
- * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
+ * @since 0.2
  */
-public final class AbsTest {
+public final class Ulp extends NumberEnvelope {
 
-    @Test
-    public void value() {
-        MatcherAssert.assertThat(
-            new Abs(() -> -6),
-            new ScalarHasValue<>(6.0)
-        );
+    /**
+     * Serialization marker.
+     */
+    private static final long serialVersionUID = -2250812826111719274L;
+
+    /**
+     * Ctor.
+     * @param scl Scalar
+     */
+    public Ulp(final Scalar<Number> scl) {
+        this(new UncheckedScalar<>(scl).value());
     }
+
+    /**
+     * Ctor.
+     * @param nmb Number
+     */
+    public Ulp(final Number nmb) {
+        super(() -> Math.ulp(nmb.doubleValue()));
+    }
+
 }

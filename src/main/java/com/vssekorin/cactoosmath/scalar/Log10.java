@@ -23,26 +23,38 @@
  */
 package com.vssekorin.cactoosmath.scalar;
 
-import org.cactoos.matchers.ScalarHasValue;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.NumberEnvelope;
+import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Test case for {@link Exp}.
+ * Returns the base 10 logarithm of a double value.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @since 0.1
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
+ * @since 0.2
  */
-public final class AbsTest {
+public final class Log10 extends NumberEnvelope {
 
-    @Test
-    public void value() {
-        MatcherAssert.assertThat(
-            new Abs(() -> -6),
-            new ScalarHasValue<>(6.0)
-        );
+    /**
+     * Serialization marker.
+     */
+    private static final long serialVersionUID = -9011457835816900608L;
+
+    /**
+     * Ctor.
+     * @param scl Scalar
+     */
+    public Log10(final Scalar<Number> scl) {
+        this(new UncheckedScalar<>(scl).value());
     }
+
+    /**
+     * Ctor.
+     * @param nmb Number
+     */
+    public Log10(final Number nmb) {
+        super(() -> Math.log10(nmb.doubleValue()));
+    }
+
 }

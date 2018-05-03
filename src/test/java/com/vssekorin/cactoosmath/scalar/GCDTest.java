@@ -28,21 +28,22 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link Exp}.
+ * Test case for {@link GCD}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.2
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
+ * @checkstyle AbbreviationAsWordInNameCheck (500 lines)
  */
-public final class AbsTest {
+public final class GCDTest {
 
     @Test
     public void value() {
         MatcherAssert.assertThat(
-            new Abs(() -> -6),
-            new ScalarHasValue<>(6.0)
+            new GCD(5, 10),
+            new ScalarHasValue<>(5)
         );
     }
 }

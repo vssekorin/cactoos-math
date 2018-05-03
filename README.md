@@ -2,9 +2,9 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/VsSekorin/cactoos-math)](http://www.rultor.com/p/VsSekorin/cactoos-math)
 
 [![Build Status](https://travis-ci.org/VsSekorin/cactoos-math.svg?branch=master)](https://travis-ci.org/VsSekorin/cactoos-math)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/VsSekorin/cactoos-math/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/VsSekorin/cactoos-math/blob/master/LICENSE.txt)
 
-Math extension of [Cactoos](https://github.com/yegor256/cactoos) ([my blog post about this](http://vssekorin.com/post/cactoos/)).
+Cactoos-Math is math extension of [Cactoos](https://github.com/yegor256/cactoos) ([my blog post about this](http://vssekorin.com/post/cactoos/)).
 
 **Motivation**:
 
@@ -153,6 +153,7 @@ mvn clean install -Pqulice
 ## Contributors
 
   - [@VsSekorin](https://github.com/VsSekorin) as Vseslav Sekorin ([Blog](http://vssekorin.com))
+  - [@daryaego](https://github.com/daryaego) as Darya Egorova
 
 ## MIT License
 
