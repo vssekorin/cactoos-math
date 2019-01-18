@@ -24,7 +24,6 @@
 package com.vssekorin.cactoosmath.scalar;
 
 import com.vssekorin.cactoosmath.iterable.Seq;
-import org.cactoos.iterable.Limited;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -44,10 +43,7 @@ public final class FoldLeftTest {
     public void value() throws Exception {
         MatcherAssert.assertThat(
             new FoldLeft<>(
-                new Limited<>(
-                    5,
-                    new Seq<>(1, a -> a + 1)
-                ),
+                new Seq<Integer>(1, a -> a + 1),
                 fst -> snd -> fst * snd,
                 6
             ).value(),

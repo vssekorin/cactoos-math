@@ -24,7 +24,6 @@
 package com.vssekorin.cactoosmath.scalar;
 
 import com.vssekorin.cactoosmath.iterable.Seq;
-import org.cactoos.iterable.Limited;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -43,10 +42,7 @@ public final class ReduceRightTest {
     public void value() throws Exception {
         MatcherAssert.assertThat(
             new ReduceRight<>(
-                new Limited<>(
-                    3,
-                    new Seq<>(2, a -> a * 2)
-                ),
+                new Seq<Integer>(2, a -> a * 2),
                 fst -> snd -> fst - snd
             ).value(),
             CoreMatchers.equalTo(2)

@@ -23,7 +23,7 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import org.cactoos.matchers.ScalarHasValue;
+import org.llorllale.cactoos.matchers.ScalarHasValue;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
