@@ -24,32 +24,57 @@
 package com.vssekorin.cactoosmath.vector;
 
 import com.vssekorin.cactoosmath.Vector;
+import com.vssekorin.cactoosmath.func.BiFuncFunc;
+import org.cactoos.BiFunc;
+import org.cactoos.Func;
 
 /**
- * Vector of.
+ * Vector subtraction.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of vector
+ * @param <X> Type of first vector.
+ * @param <Y> Type of second vector.
+ * @param <Z> Type of result vector.
  * @since 0.3
  */
-public final class VectorOf<T> extends VectorEnvelope<T> {
+@SuppressWarnings(
+    {
+        "PMD.CallSuperInConstructor",
+        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
+        "PMD.LooseCoupling"
+    }
+)
+public final class VectorSub<X, Y, Z> extends VectorEnvelope<Z> {
 
     /**
      * Ctor.
-     * @param src Array
+     * @param first First vector
+     * @param second Second vector
+     * @param subt Subtraction
      */
-    @SafeVarargs
-    public VectorOf(final T... src) {
-        this(() -> src);
+    public VectorSub(final Vector<X> first, final Vector<Y> second,
+        final BiFunc<X, Y, Z> subt) {
+        this(first, second, new BiFuncFunc<>(subt));
     }
 
     /**
      * Ctor.
-     * @param src Vector
+     * @param first First vector
+     * @param second Second vector
+     * @param subt Subtraction
      */
-    @SuppressWarnings("PMD.LooseCoupling")
-    public VectorOf(final Vector<T> src) {
-        super(() -> src);
+    @SuppressWarnings("unchecked")
+    public VectorSub(final Vector<X> first, final Vector<Y> second,
+        final Func<X, Func<Y, Z>> subt) {
+        super(() -> () -> {
+            final X[] fst = first.asArray();
+            final Y[] snd = second.asArray();
+            final Z[] result = (Z[]) new Object[fst.length];
+            for (int ind = 0; ind < result.length; ++ind) {
+                result[ind] = subt.apply(fst[ind]).apply(snd[ind]);
+            }
+            return result;
+        });
     }
 }

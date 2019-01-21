@@ -23,33 +23,33 @@
  */
 package com.vssekorin.cactoosmath.vector;
 
-import com.vssekorin.cactoosmath.Vector;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Vector of.
+ * Test case for {@link VectorSub}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of vector
  * @since 0.3
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class VectorOf<T> extends VectorEnvelope<T> {
+public final class VectorSubTest {
 
-    /**
-     * Ctor.
-     * @param src Array
-     */
-    @SafeVarargs
-    public VectorOf(final T... src) {
-        this(() -> src);
+    @Test
+    public void testSubtraction() throws Exception {
+        MatcherAssert.assertThat(
+            new VectorSub<>(
+                new VectorOf<>(9, 8, 7),
+                new VectorOf<>(1, 2, 3),
+                a -> b -> a - b
+            ).asArray(),
+            CoreMatchers.equalTo(
+                new Integer[]{8, 6, 4}
+            )
+        );
     }
 
-    /**
-     * Ctor.
-     * @param src Vector
-     */
-    @SuppressWarnings("PMD.LooseCoupling")
-    public VectorOf(final Vector<T> src) {
-        super(() -> src);
-    }
 }

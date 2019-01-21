@@ -21,35 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.vector;
-
-import com.vssekorin.cactoosmath.Vector;
 
 /**
- * Vector of.
+ * Tests for vectors.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of vector
  * @since 0.3
  */
-public final class VectorOf<T> extends VectorEnvelope<T> {
-
-    /**
-     * Ctor.
-     * @param src Array
-     */
-    @SafeVarargs
-    public VectorOf(final T... src) {
-        this(() -> src);
-    }
-
-    /**
-     * Ctor.
-     * @param src Vector
-     */
-    @SuppressWarnings("PMD.LooseCoupling")
-    public VectorOf(final Vector<T> src) {
-        super(() -> src);
-    }
-}
+package com.vssekorin.cactoosmath.vector;
