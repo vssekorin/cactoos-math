@@ -28,7 +28,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Test case for {@link Mapped}.
+ * Test case for {@link MappedMatrix}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -36,12 +36,12 @@ import org.junit.Test;
  * @checkstyle JavadocMethodCheck (500 lines)
  * @checkstyle MagicNumberCheck (500 lines)
  */
-public final class MappedTest {
+public final class MappedMatrixTest {
 
     @Test
     public void asArray() throws Exception {
         MatcherAssert.assertThat(
-            new Mapped<>(
+            new MappedMatrix<>(
                 new MatrixOf<>(
                     new Integer[][]{
                         {1, 2, 3},

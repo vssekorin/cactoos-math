@@ -41,7 +41,7 @@ import org.cactoos.Func;
         "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
     }
 )
-public final class Mapped<X, Y> extends MatrixEnvelope<Y> {
+public final class MappedMatrix<X, Y> extends MatrixEnvelope<Y> {
 
     /**
      * Ctor.
@@ -49,7 +49,7 @@ public final class Mapped<X, Y> extends MatrixEnvelope<Y> {
      * @param map Func
      */
     @SuppressWarnings("unchecked")
-    public Mapped(final Matrix<X> origin, final Func<X, Y> map) {
+    public MappedMatrix(final Matrix<X> origin, final Func<X, Y> map) {
         super(() -> () -> {
             final int rows = new NmbRows<>(origin).value();
             final int cols = new NmbColumns<>(origin).value();
