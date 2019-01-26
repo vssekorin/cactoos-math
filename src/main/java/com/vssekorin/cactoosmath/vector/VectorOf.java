@@ -33,7 +33,50 @@ import com.vssekorin.cactoosmath.Vector;
  * @param <T> Type of vector
  * @since 0.3
  */
+@SuppressWarnings(
+    {
+        "PMD.CallSuperInConstructor",
+        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
+        "PMD.LooseCoupling",
+        "unchecked"
+    }
+)
 public final class VectorOf<T> extends VectorEnvelope<T> {
+
+    /**
+     * Ctor.
+     * @param origin Origin vector
+     * @param length New Length
+     */
+    public VectorOf(final Vector<T> origin, final int length) {
+        this(() -> {
+            final T[] vector = origin.asArray();
+            final T[] result = (T[]) new Object[length];
+            System.arraycopy(vector, 0, result, 0, length);
+            return result;
+        });
+    }
+
+    /**
+     * Ctor.
+     * @param origin Origin vector
+     * @param length New length
+     * @param value Default value
+     */
+    public VectorOf(final Vector<T> origin, final int length, final T value) {
+        this(() -> {
+            final T[] vector = origin.asArray();
+            final T[] result = (T[]) new Object[length];
+            for (int ind = 0; ind < length; ++ind) {
+                if (ind < vector.length) {
+                    result[ind] = vector[ind];
+                } else {
+                    result[ind] = value;
+                }
+            }
+            return result;
+        });
+    }
 
     /**
      * Ctor.
@@ -48,7 +91,6 @@ public final class VectorOf<T> extends VectorEnvelope<T> {
      * Ctor.
      * @param src Vector
      */
-    @SuppressWarnings("PMD.LooseCoupling")
     public VectorOf(final Vector<T> src) {
         super(() -> src);
     }
