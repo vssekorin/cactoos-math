@@ -24,9 +24,9 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
+import com.vssekorin.cactoosmath.vector.VectorEnvelope;
+import com.vssekorin.cactoosmath.vector.VectorOf;
 import org.cactoos.Scalar;
-import org.cactoos.iterable.IterableEnvelope;
-import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.scalar.UncheckedScalar;
 
@@ -38,7 +38,7 @@ import org.cactoos.scalar.UncheckedScalar;
  * @param <T> Elements type
  * @since 0.2
  */
-public final class Row<T> extends IterableEnvelope<T> {
+public final class Row<T> extends VectorEnvelope<T> {
 
     /**
      * Ctor.
@@ -64,6 +64,6 @@ public final class Row<T> extends IterableEnvelope<T> {
      * @param row Integer
      */
     public Row(final Matrix<T> matrix, final int row) {
-        super(() -> new IterableOf<>(matrix.asArray()[row]));
+        super(() -> new VectorOf<>(matrix.asArray()[row]));
     }
 }

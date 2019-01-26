@@ -39,7 +39,7 @@ import org.junit.Test;
 public final class RowTest {
 
     @Test
-    public void get() {
+    public void get() throws Exception {
         MatcherAssert.assertThat(
             new Row<>(
                 new MatrixOf<>(
@@ -47,8 +47,8 @@ public final class RowTest {
                     1, 2, 3, 4, 5, 6, 7, 8, 9
                 ),
                 1
-            ),
-            CoreMatchers.hasItems(4, 5, 6)
+            ).asArray(),
+            CoreMatchers.equalTo(new Integer[]{4, 5, 6})
         );
     }
 }
