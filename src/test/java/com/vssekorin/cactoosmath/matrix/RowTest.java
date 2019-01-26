@@ -48,7 +48,7 @@ public final class RowTest {
                 ),
                 1
             ).asArray(),
-            CoreMatchers.is(new Integer[]{4, 5, 6})
+            CoreMatchers.equalTo(new Integer[]{4, 5, 6})
         );
     }
 }
