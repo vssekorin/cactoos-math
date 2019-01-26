@@ -24,10 +24,8 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
-import java.util.ArrayList;
-import java.util.List;
+import com.vssekorin.cactoosmath.vector.VectorEnvelope;
 import org.cactoos.Scalar;
-import org.cactoos.iterable.IterableEnvelope;
 import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.scalar.UncheckedScalar;
 
@@ -39,7 +37,13 @@ import org.cactoos.scalar.UncheckedScalar;
  * @param <T> Elements type
  * @since 0.2
  */
-public final class Column<T> extends IterableEnvelope<T> {
+@SuppressWarnings(
+    {
+        "PMD.CallSuperInConstructor",
+        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
+    }
+)
+public final class Column<T> extends VectorEnvelope<T> {
 
     /**
      * Ctor.
@@ -64,12 +68,13 @@ public final class Column<T> extends IterableEnvelope<T> {
      * @param matrix Matrix
      * @param col Integer
      */
+    @SuppressWarnings("unchecked")
     public Column(final Matrix<T> matrix, final int col) {
-        super(() -> {
-            final List<T> result =
-                new ArrayList<>(new NmbRows<>(matrix).value());
-            for (final T[] row : matrix.asArray()) {
-                result.add(row[col]);
+        super(() -> () -> {
+            final T[][] values = matrix.asArray();
+            final T[] result = (T[]) new Object[values.length];
+            for (int row = 0; row < result.length; ++row) {
+                result[row] = values[row][col];
             }
             return result;
         });
