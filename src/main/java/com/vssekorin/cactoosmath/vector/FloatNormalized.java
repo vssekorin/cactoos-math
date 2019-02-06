@@ -27,34 +27,23 @@ import com.vssekorin.cactoosmath.Vector;
 import org.cactoos.Scalar;
 
 /**
- * Euclidean norm (distance).
+ * Normalized float vector.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.3
  */
 @SuppressWarnings("PMD.LooseCoupling")
-public final class FloatEuclideanNorm implements Scalar<Float> {
-
-    /**
-     * Float vector.
-     */
-    private final Vector<Float> vector;
+public final class FloatNormalized extends VectorEnvelope<Float> {
 
     /**
      * Ctor.
-     * @param src Float vector
+     * @param vector Original vector
      */
-    public FloatEuclideanNorm(final Vector<Float> src) {
-        this.vector = src;
-    }
-
-    @Override
-    public Float value() throws Exception {
-        float norm = 0f;
-        for (final Float value : this.vector.asArray()) {
-            norm += value * value;
-        }
-        return (float) Math.sqrt(norm);
+    public FloatNormalized(final Vector<Float> vector) {
+        super(() -> {
+            final Scalar<Float> norm = new FloatEuclideanNorm(vector);
+            return new FloatVectorMult(vector, 1 / norm.value());
+        });
     }
 }
