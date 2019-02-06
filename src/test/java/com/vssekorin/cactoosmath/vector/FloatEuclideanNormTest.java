@@ -42,9 +42,9 @@ public final class FloatEuclideanNormTest {
     public void value() throws Exception {
         MatcherAssert.assertThat(
             new FloatEuclideanNorm(
-                new VectorOf<>(1f, 2f, 3f)
+                new VectorOf<>(4f, 3f)
             ).value(),
-            CoreMatchers.equalTo(14f)
+            CoreMatchers.equalTo(5f)
         );
     }
 }

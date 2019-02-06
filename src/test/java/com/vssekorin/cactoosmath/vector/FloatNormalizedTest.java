@@ -23,38 +23,28 @@
  */
 package com.vssekorin.cactoosmath.vector;
 
-import com.vssekorin.cactoosmath.Vector;
-import org.cactoos.Scalar;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Euclidean norm (distance).
+ * Test case for {@link FloatNormalized}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
  * @since 0.3
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings("PMD.LooseCoupling")
-public final class FloatEuclideanNorm implements Scalar<Float> {
+public final class FloatNormalizedTest {
 
-    /**
-     * Float vector.
-     */
-    private final Vector<Float> vector;
-
-    /**
-     * Ctor.
-     * @param src Float vector
-     */
-    public FloatEuclideanNorm(final Vector<Float> src) {
-        this.vector = src;
-    }
-
-    @Override
-    public Float value() throws Exception {
-        float norm = 0f;
-        for (final Float value : this.vector.asArray()) {
-            norm += value * value;
-        }
-        return (float) Math.sqrt(norm);
+    @Test
+    public void apply() throws Exception {
+        MatcherAssert.assertThat(
+            new FloatNormalized(new VectorOf<>(2f, 2f, 2f)).asArray(),
+            CoreMatchers.equalTo(
+                new Float[]{0.57735026f, 0.57735026f, 0.57735026f}
+            )
+        );
     }
 }
