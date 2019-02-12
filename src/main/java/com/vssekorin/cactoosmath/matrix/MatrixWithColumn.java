@@ -34,6 +34,13 @@ import com.vssekorin.cactoosmath.Vector;
  * @param <T> Type of elements
  * @since 0.3
  */
+@SuppressWarnings(
+    {
+        "PMD.CallSuperInConstructor",
+        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
+        "PMD.LooseCoupling"
+    }
+)
 public final class MatrixWithColumn<T> extends MatrixEnvelope<T> {
 
     /**
@@ -48,9 +55,10 @@ public final class MatrixWithColumn<T> extends MatrixEnvelope<T> {
         super(() -> () -> {
             final T[][] matrix = mtx.asArray();
             final T[] vector = vct.asArray();
-            final T[][] result = (T[][]) new Object[matrix.length][matrix[0].length];
-            for (int row = 0; row < matrix.length; row++) {
-                for (int col = 0; col < matrix[0].length; col++) {
+            final T[][] result =
+                (T[][]) new Object[matrix.length][matrix[0].length];
+            for (int row = 0; row < matrix.length; ++row) {
+                for (int col = 0; col < matrix[0].length; ++col) {
                     if (row == nmb) {
                         result[row][col] = vector[col];
                     } else {
