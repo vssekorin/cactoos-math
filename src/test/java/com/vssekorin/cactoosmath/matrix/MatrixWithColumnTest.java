@@ -55,9 +55,9 @@ public final class MatrixWithColumnTest {
             ).asArray(),
             CoreMatchers.equalTo(
                 new Integer[][]{
-                    {1, 2, 3},
-                    {10, 11, 12},
-                    {7, 8, 9},
+                    {1, 10, 3},
+                    {4, 11, 6},
+                    {7, 12, 9},
                 }
             )
         );
