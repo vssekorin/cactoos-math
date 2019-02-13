@@ -27,7 +27,7 @@ import com.vssekorin.cactoosmath.Matrix;
 import com.vssekorin.cactoosmath.Vector;
 
 /**
- * Matrix with column.
+ * Matrix with row.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
@@ -41,29 +41,30 @@ import com.vssekorin.cactoosmath.Vector;
         "PMD.LooseCoupling"
     }
 )
-public final class MatrixWithColumn<T> extends MatrixEnvelope<T> {
+public final class MatrixWithRow<T> extends MatrixEnvelope<T> {
 
     /**
      * Ctor.
      * @param mtx Origin matrix
-     * @param vct Column
-     * @param nmb Number of column
+     * @param vct Row
+     * @param nmb Number of row
      */
     @SuppressWarnings("unchecked")
-    public MatrixWithColumn(final Matrix<T> mtx, final Vector<T> vct,
+    public MatrixWithRow(final Matrix<T> mtx, final Vector<T> vct,
         final int nmb) {
         super(() -> () -> {
             final T[][] matrix = mtx.asArray();
-            final T[] vector = vct.asArray();
             final T[][] result =
                 (T[][]) new Object[matrix.length][matrix[0].length];
             for (int row = 0; row < matrix.length; ++row) {
-                for (int col = 0; col < matrix[0].length; ++col) {
-                    if (col == nmb) {
-                        result[row][col] = vector[row];
-                    } else {
-                        result[row][col] = matrix[row][col];
-                    }
+                if (row == nmb) {
+                    System.arraycopy(
+                        vct.asArray(), 0, result[row], 0, matrix[row].length
+                    );
+                } else {
+                    System.arraycopy(
+                        matrix[row], 0, result[row], 0, matrix[row].length
+                    );
                 }
             }
             return result;

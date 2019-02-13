@@ -23,50 +23,43 @@
  */
 package com.vssekorin.cactoosmath.matrix;
 
-import com.vssekorin.cactoosmath.Matrix;
-import com.vssekorin.cactoosmath.Vector;
+import com.vssekorin.cactoosmath.vector.VectorOf;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
- * Matrix with column.
+ * Test case for {@link MatrixWithRow}.
  *
  * @author Vseslav Sekorin (vssekorin@gmail.com)
  * @version $Id$
- * @param <T> Type of elements
  * @since 0.3
+ * @checkstyle JavadocMethodCheck (500 lines)
+ * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.CallSuperInConstructor",
-        "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
-        "PMD.LooseCoupling"
-    }
-)
-public final class MatrixWithColumn<T> extends MatrixEnvelope<T> {
+public final class MatrixWithRowTest {
 
-    /**
-     * Ctor.
-     * @param mtx Origin matrix
-     * @param vct Column
-     * @param nmb Number of column
-     */
-    @SuppressWarnings("unchecked")
-    public MatrixWithColumn(final Matrix<T> mtx, final Vector<T> vct,
-        final int nmb) {
-        super(() -> () -> {
-            final T[][] matrix = mtx.asArray();
-            final T[] vector = vct.asArray();
-            final T[][] result =
-                (T[][]) new Object[matrix.length][matrix[0].length];
-            for (int row = 0; row < matrix.length; ++row) {
-                for (int col = 0; col < matrix[0].length; ++col) {
-                    if (col == nmb) {
-                        result[row][col] = vector[row];
-                    } else {
-                        result[row][col] = matrix[row][col];
+    @Test
+    public void apply() throws Exception {
+        MatcherAssert.assertThat(
+            new MatrixWithRow<>(
+                new MatrixOf<>(
+                    new Integer[][]{
+                        {1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9},
                     }
+                ),
+                new VectorOf<>(10, 11, 12),
+                1
+            ).asArray(),
+            CoreMatchers.equalTo(
+                new Integer[][]{
+                    {1, 2, 3},
+                    {10, 11, 12},
+                    {7, 8, 9},
                 }
-            }
-            return result;
-        });
+            )
+        );
     }
 }
