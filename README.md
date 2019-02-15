@@ -105,20 +105,6 @@ new IntDet<>(
 )
 ```
 
-## Graphs
-
-Remove node:
-
-```java
-new RemoveNode<>(
-    new GraphOf<>(
-        new ListOf<>(1, 2, 3),
-        node -> new ListOf<>(1, 2, 3)
-    ),
-    2
-)
-```
-
 ## Scalars
 
 Random number in [2; 4]:
@@ -154,6 +140,7 @@ mvn clean install -Pqulice
 
   - [@VsSekorin](https://github.com/VsSekorin) as Vseslav Sekorin ([Blog](http://vssekorin.com))
   - [@daryaego](https://github.com/daryaego) as Darya Egorova
+  - [@floreasorin](https://github.com/floreasorin)
 
 ## MIT License
 
