@@ -24,6 +24,7 @@
 package com.vssekorin.cactoosmath.vector;
 
 import com.vssekorin.cactoosmath.Vector;
+import org.cactoos.Func;
 
 /**
  * Vector of.
@@ -37,11 +38,27 @@ import com.vssekorin.cactoosmath.Vector;
     {
         "PMD.CallSuperInConstructor",
         "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
+        "PMD.OnlyOneConstructorShouldDoInitialization",
         "PMD.LooseCoupling",
         "unchecked"
     }
 )
 public final class VectorOf<T> extends VectorEnvelope<T> {
+
+    /**
+     * Ctor.
+     * @param func Creator function
+     * @param length Length
+     */
+    public VectorOf(final Func<Integer, T> func, final int length) {
+        this(() -> {
+            final T[] result = (T[]) new Object[length];
+            for (int ind = 0; ind < length; ++ind) {
+                result[ind] = func.apply(ind);
+            }
+            return result;
+        });
+    }
 
     /**
      * Ctor.

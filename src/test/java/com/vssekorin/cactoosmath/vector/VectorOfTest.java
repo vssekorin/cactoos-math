@@ -39,6 +39,14 @@ import org.junit.Test;
 public final class VectorOfTest {
 
     @Test
+    public void byFunc() throws Exception {
+        MatcherAssert.assertThat(
+            new VectorOf<>(i -> i + 10, 3).asArray(),
+            CoreMatchers.equalTo(new Integer[]{10, 11, 12})
+        );
+    }
+
+    @Test
     public void lowLength() throws Exception {
         MatcherAssert.assertThat(
             new VectorOf<>(
