@@ -28,34 +28,37 @@ import org.cactoos.scalar.NumberEnvelope;
 import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Converts an angle measured in degrees to an approximately
- * equivalent angle measured in radians.
+ * Converts an angle measured in radians to an
+ * approximately equivalent angle measured in degrees.
+ * <p> The conversion from  radians to degrees is generally inexact.
+ * Do <i>not</i> expect perfect accuracy. </p>
  *
- * @author Vseslav Sekorin (vssekorin@gmail.com)
+ * @author Alexandru Stoica (stoica.alexandru20000@gmail.com)
  * @version $Id$
- * @since 0.2
+ * @since 0.3
  */
-public final class RadiansOf extends NumberEnvelope {
+public final class DegreesOf extends NumberEnvelope {
 
     /**
      * Serialization marker.
      */
-    private static final long serialVersionUID = -3725802265977145649L;
+    private static final long serialVersionUID = 1047352930537306205L;
 
     /**
      * Ctor.
+     *
      * @param scl Scalar
      */
-    public RadiansOf(final Scalar<Number> scl) {
+    public DegreesOf(final Scalar<Number> scl) {
         this(new UncheckedScalar<>(scl).value());
     }
 
     /**
      * Ctor.
+     *
      * @param nmb Number
      */
-    public RadiansOf(final Number nmb) {
-        super(() -> Math.toRadians(nmb.doubleValue()));
+    public DegreesOf(final Number nmb) {
+        super(() -> Math.toDegrees(nmb.doubleValue()));
     }
-
 }
