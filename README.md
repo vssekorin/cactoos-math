@@ -141,6 +141,7 @@ mvn clean install -Pqulice
   - [@VsSekorin](https://github.com/VsSekorin) as Vseslav Sekorin ([Blog](http://vssekorin.com))
   - [@daryaego](https://github.com/daryaego) as Darya Egorova
   - [@floreasorin](https://github.com/floreasorin)
+  - [@alexandrustoica](https://github.com/alexandrustoica) as Alexandru Stoica
 
 ## MIT License
 
