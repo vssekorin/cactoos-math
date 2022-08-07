@@ -1,7 +1,7 @@
-/**
- * MIT License
+/*
+ * The MIT License (MIT)
  *
- * Copyright (c) 2017-2019 Vseslav Sekorin
+ * Copyright (c) 2017-2022 Vseslav Sekorin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -15,40 +15,33 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.vssekorin.cactoosmath.matrix;
+package com.vssekorin.cactoosmath;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import com.vssekorin.cactoosmath.matrix.MatrixOf;
+import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.Assertion;
 
 /**
- * Test case for {@link Identity}.
+ * Test case for {@link MatrixOf}.
  *
- * @author Vseslav Sekorin (vssekorin@gmail.com)
- * @version $Id$
- * @since 0.3
- * @checkstyle JavadocMethodCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
+ * @since 0.5
+ * @checkstyle MagicNumber (500 lines)
  */
-public final class IdentityTest {
+final class MatrixOfTest {
 
     @Test
-    public void apply() throws Exception {
-        MatcherAssert.assertThat(
-            new Identity<>(3, 1, 0).asArray(),
-            CoreMatchers.equalTo(
-                new Integer[][]{
-                    {1, 0, 0},
-                    {0, 1, 0},
-                    {0, 0, 1},
-                }
-            )
-        );
+    void getFirstElement() throws Exception {
+        new Assertion<>(
+            "Must get first element",
+            new MatrixOf<>(new Integer[][]{{1, 2}, {3, 4}}).asArray()[0][0],
+            new IsEqual<>(1)
+        ).affirm();
     }
 }
