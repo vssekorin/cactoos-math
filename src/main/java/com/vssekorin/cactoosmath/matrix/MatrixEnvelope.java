@@ -1,7 +1,7 @@
-/**
- * MIT License
+/*
+ * The MIT License (MIT)
  *
- * Copyright (c) 2017-2019 Vseslav Sekorin
+ * Copyright (c) 2017-2022 Vseslav Sekorin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -15,7 +15,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -24,36 +24,32 @@
 package com.vssekorin.cactoosmath.matrix;
 
 import com.vssekorin.cactoosmath.Matrix;
-import org.cactoos.Scalar;
-import org.cactoos.scalar.UncheckedScalar;
 
 /**
- * Matrix envelope.
+ * Envelope for Matrix.
  *
- * @author Vseslav Sekorin (vssekorin@gmail.com)
- * @version $Id$
- * @param <T> Type of matrix
+ * <p>There is no thread-safety guarantee.
+ *
+ * @param <T> Type of result
  * @since 0.1
- * @checkstyle AbstractClassNameCheck (500 lines)
  */
-@SuppressWarnings("PMD.AbstractNaming")
 public abstract class MatrixEnvelope<T> implements Matrix<T> {
 
     /**
-     * The matrix.
+     * The delegate matrix.
      */
-    private final UncheckedScalar<Matrix<T>> origin;
+    private final Matrix<? extends T> matrix;
 
     /**
      * Ctor.
-     * @param matrix The source
+     * @param matrix The scalar
      */
-    public MatrixEnvelope(final Scalar<Matrix<T>> matrix) {
-        this.origin = new UncheckedScalar<>(matrix);
+    public MatrixEnvelope(final Matrix<? extends T> matrix) {
+        this.matrix = matrix;
     }
 
     @Override
     public final T[][] asArray() throws Exception {
-        return this.origin.value().asArray();
+        return this.matrix.asArray();
     }
 }
